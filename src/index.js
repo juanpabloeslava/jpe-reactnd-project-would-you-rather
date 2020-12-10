@@ -1,6 +1,8 @@
 // npm install redux react-redux
 // npm install --save redux-devtools-extension
 // npm install react-router-dom
+// npm install redux-thunk
+// npm i --save redux-logger
 
 import React from 'react';
 import ReactDOM from 'react-dom';
