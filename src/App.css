@@ -38,6 +38,10 @@
 
 /* APP */
 
+.view-container {
+  padding: 0 1rem;
+}
+
 .nav-container ul {
   display: flex;
   flex-direction: row;
