@@ -1,13 +1,30 @@
+import React, { Component } from 'react';
+import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
+// views and components
+import Nav from './components/Nav'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        Would you rather Project - JP
-      </header>
-    </div>
-  );
+
+class App extends Component {
+  
+  render() {
+    return (
+      <BrowserRouter>
+        <div className="App">
+          <Nav navType='1'/>
+          <Route exact path='/' render={ () => (
+            <div> HOME </div>
+          )} />
+          <Route exact path='/add' render={ () => (
+            <div> ADD </div>
+          )} />
+          <Route exact path='/leaderboard' render={ () => (
+            <div> LEADERBOARD </div>
+          )} />
+        </div>
+      </BrowserRouter>
+    );
+  }
 }
 
 export default App;
