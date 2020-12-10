@@ -3,6 +3,8 @@
 // npm install react-router-dom
 // npm install redux-thunk
 // npm i --save redux-logger
+// npm install @material-ui/core
+// npm install @material-ui/icons
 
 import React from 'react';
 import ReactDOM from 'react-dom';
