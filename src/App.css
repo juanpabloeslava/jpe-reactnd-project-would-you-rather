@@ -43,10 +43,15 @@
   flex-direction: row;
   justify-content: flex-start;
   text-decoration: none;
+  padding: 0 1rem;
 }
 
 li {
   list-style-type: none;
   padding: 10px;
   text-decoration: none;
+}
+
+li.login {
+  margin-left: auto;
 }

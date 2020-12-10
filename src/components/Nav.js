@@ -19,6 +19,9 @@ class Nav extends Component {
                     <li>
                         <NavLink to='/leaderboard'> Leaderboard </NavLink>
                     </li>
+                    <li className='login'>
+                        <NavLink to='/login'> Log in </NavLink>
+                    </li>
                 </ul>
             </div>
         )
