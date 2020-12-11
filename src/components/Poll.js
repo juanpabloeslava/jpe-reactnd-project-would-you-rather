@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { formatDate } from '../utils/helpers'
 import PollOptions from './PollOptions'
+import { withRouter } from 'react-router-dom'
 // material imports
 import { Button } from '@material-ui/core';
 
@@ -18,6 +19,14 @@ class Poll extends Component {
                 answer
             };
         });
+    }
+
+    toHome = () => {
+        // By using withRouter() down by connect(), it passes history to the comp as props even though React Router is not rendering the comp. 
+
+        this.props.history.push(`/`)
+
+        console.log('go to home was clicked')
     }
 
     render() {
@@ -49,7 +58,7 @@ class Poll extends Component {
                                     <span className='user-name'>{answer}</span>
                                     <div className='poll-btns'>
                                         <div>
-                                            <Button type="submit" className='MuiButton-contained'>Back to Polls</Button>
+                                            <Button onClick={ () => this.toHome()} className='MuiButton-contained'>Back to Polls</Button>
                                         </div>
                                         <div>
                                             <Button type="submit" className='MuiButton-containedPrimary'>Next Poll</Button>
@@ -67,4 +76,4 @@ class Poll extends Component {
 }
 
 
-export default Poll
+export default withRouter(Poll)
