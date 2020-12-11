@@ -7,6 +7,7 @@ import Home from './views/Home'
 import AddQuestion from './views/AddQuestion'
 import Leaderboard from './views/Leaderboard'
 import Login from './views/Login'
+import PollView from './views/PollView';
 
 
 class App extends Component {
@@ -18,6 +19,9 @@ class App extends Component {
           <Nav navType='1'/>
           <Route exact path='/' render={ () => (
             <Home />
+          )} />
+          <Route exact path='/question' render={ () => (
+              <PollView />
           )} />
           <Route exact path='/add' render={ () => (
             <AddQuestion />
