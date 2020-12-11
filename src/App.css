@@ -84,7 +84,7 @@ li.login {
   margin-left: auto;
 }
 
-/* Poll */
+/* Poll List */
 
 .poll-list-item {
   /* max-width: 590px; */
@@ -113,6 +113,7 @@ li.login {
 }
 
 .poll-info {
+  width: 88%;
   margin: 10px;
   display: flex;
   flex-direction: column;
@@ -120,4 +121,61 @@ li.login {
 .poll-info .user-name {
   font-weight: bold;
   margin-right: 5px;
+}
+
+/* Poll */
+
+.poll {
+  padding: 10px;
+  display: flex;
+  margin: 1rem auto;
+  border: 1px solid #dad7d7;
+  border-radius: 3px;
+  justify-content: flex-start;
+  text-decoration: none;
+}
+
+.poll .avatar-container {
+  max-height: 60px;
+  max-width: 60px;
+  border-radius: 30px;
+}
+
+.poll-submit-btn {
+  display: inline-block;
+  /* border: 1px solid #dad7d7;
+  border-radius: 4px; */
+  margin-top: 1rem;
+}
+
+.poll-btns {
+  margin: 1rem 0 0 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.poll-btns div:first-child {
+  margin-right: 1rem;
+}
+
+/* Poll Percentage */
+.percentage-bar {
+  /* margin: 1rem; */
+  height: 30px;
+  background-color: #ddd;
+  border-radius: 15px;
+}
+
+.percentage-bar-done {
+  height: 100%;
+  width: 50%;
+  background: linear-gradient(to right,#e0240b, #80300b );
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f1f1f1;
+}
+.sel {
+  background: linear-gradient(to right,#15ca1e, #058d7b );
 }
