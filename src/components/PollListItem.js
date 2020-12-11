@@ -1,13 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { formatDate } from '../utils/helpers'
 
 class PollListItem extends Component {
-
-    formatDate = (timestamp) => {
-        const d = new Date(timestamp)
-        const time = d.toLocaleTimeString('en-US')
-        return time.substr(0, 5) + time.slice(-2) + ' | ' + d.toLocaleDateString()
-      }
 
     render() {
         return ( 
@@ -20,7 +15,7 @@ class PollListItem extends Component {
                     <div className='poll-info'>
                         <div>
                             <span className='user-name'> Sarah asked</span>
-                            <div> {this.formatDate(1468479767190)} </div>
+                            <div> {formatDate(1468479767190)} </div>
                             <p> Would you rather <span>have horrible short term memory</span> or <span>have horrible long term memory</span>?</p>
                         </div>
                     </div>
