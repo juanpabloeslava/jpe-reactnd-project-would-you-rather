@@ -8,7 +8,7 @@ class PollListItem extends Component {
         return ( 
             <div>
                 {/* {this.props.temp} */}
-                <Link className='poll-list-item'>
+                <Link className='poll-list-item' to='/question'>
                     <div className='avatar-container'>
                         <img className='avatar' src={`https://gravatar.com/avatar/90e832b87dc32a1741b5e30afd452824?s=400&d=robohash&r=x`} />
                     </div>
