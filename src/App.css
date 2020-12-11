@@ -1,6 +1,6 @@
-.App {
+/* .App {
   text-align: center;
-}
+} */
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -15,7 +15,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* font-size: calc(10px + 2vmin); */
+  font-size: calc(10px + 2vmin);
   font-size: 1.5rem;
   color: #333;
 }
@@ -36,10 +36,33 @@
 
 /* jp styles */
 
+a {
+  text-decoration: none;
+  color: #252525;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  color: #252525;
+}
+
+.no-margin {
+  margin: 0;
+}
+.no-padding {
+  padding: 0;
+}
+
 /* APP */
 
 .view-container {
   padding: 0 1rem;
+}
+
+/* nav */
+.nav-container {
+  /* position: absolute; */
 }
 
 .nav-container ul {
@@ -50,7 +73,7 @@
   padding: 0 1rem;
 }
 
-li {
+.nav-container ul li {
   list-style-type: none;
   padding: 10px;
   text-decoration: none;
@@ -58,4 +81,42 @@ li {
 
 li.login {
   margin-left: auto;
+}
+
+/* Poll */
+
+.poll-list-item {
+  /* max-width: 590px; */
+  padding: 10px;
+  display: flex;
+  margin: 1rem auto;
+  border: 1px solid #dad7d7;
+  border-radius: 3px;
+  cursor: pointer;
+  justify-content: flex-start;
+  text-decoration: none;
+}
+
+.avatar-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ccc;
+  max-height: 50px;
+  max-width: 50px;
+  border-radius: 25px;
+}
+
+.avatar {
+  max-height: 100%;
+}
+
+.poll-info {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.poll-info .user-name {
+  font-weight: bold;
+  margin-right: 5px;
 }
