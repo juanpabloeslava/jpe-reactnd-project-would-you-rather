@@ -106,6 +106,7 @@ li.login {
   max-height: 50px;
   max-width: 50px;
   border-radius: 25px;
+  overflow: hidden;
 }
 
 .avatar {
@@ -145,11 +146,15 @@ li.login {
   display: inline-block;
   /* border: 1px solid #dad7d7;
   border-radius: 4px; */
-  margin-top: 1rem;
+  margin: 1rem 0;
+}
+
+.submission-summary {
+  font-weight: bold;
 }
 
 .poll-btns {
-  margin: 1rem 0 0 0;
+  margin: 1.5rem 0 0 0;
   display: flex;
   justify-content: flex-end;
 }
@@ -178,4 +183,16 @@ li.login {
 }
 .sel {
   background: linear-gradient(to right,#15ca1e, #058d7b );
+}
+
+/* Add poll */
+
+.poll-input-divider {
+  padding: 0.5rem;
+
+}
+.add-poll-btns {
+  margin: 2rem 0 0 0;
+  display: flex;
+  justify-content: space-between;
 }

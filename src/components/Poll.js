@@ -23,10 +23,7 @@ class Poll extends Component {
 
     toHome = () => {
         // By using withRouter() down by connect(), it passes history to the comp as props even though React Router is not rendering the comp. 
-
         this.props.history.push(`/`)
-
-        console.log('go to home was clicked')
     }
 
     render() {
@@ -36,7 +33,7 @@ class Poll extends Component {
         return (
             <div className='list-container'>
                 <h3 className='center'>Poll</h3>
-                <div >
+                <div>
                     <div className='poll'>
                         <div className='avatar-container'>
                             <img className='avatar' src={`https://gravatar.com/avatar/90e832b87dc32a1741b5e30afd452824?s=400&d=robohash&r=x`} />
@@ -54,8 +51,8 @@ class Poll extends Component {
                                 </div>
                                 { alreadyAnswered && (
                                 <div>
-                                    <p> You chose: </p>
-                                    <span className='user-name'>{answer}</span>
+                                    {/* <p> You chose: </p> */}
+                                    <span className='submission-summary'>You would rather {answer}</span>
                                     <div className='poll-btns'>
                                         <div>
                                             <Button onClick={ () => this.toHome()} className='MuiButton-contained'>Back to Polls</Button>

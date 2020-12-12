@@ -4,7 +4,7 @@ import './App.css';
 // views and components
 import Nav from './components/Nav'
 import Home from './views/Home'
-import AddQuestion from './views/AddQuestion'
+import AddPoll from './views/AddPoll';
 import Leaderboard from './views/Leaderboard'
 import Login from './views/Login'
 import PollView from './views/PollView';
@@ -24,7 +24,7 @@ class App extends Component {
               <PollView />
           )} />
           <Route exact path='/add' render={ () => (
-            <AddQuestion />
+            <AddPoll />
           )} />
           <Route exact path='/leaderboard' render={ () => (
             <Leaderboard />
