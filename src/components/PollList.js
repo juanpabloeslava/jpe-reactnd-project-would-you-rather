@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
+import PollListItem from '../components/PollListItem';
 // material imports
 import {  AppBar, Tab } from '@material-ui/core';
 import { TabContext, TabList, TabPanel } from '@material-ui/lab';
 import { withStyles } from '@material-ui/core/styles';
-import PollListItem from '../components/PollListItem';
 
 
 class PollList extends Component {
