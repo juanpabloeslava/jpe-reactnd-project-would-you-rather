@@ -6,19 +6,10 @@ import PollList from '../components/PollList';
 
 class Home extends Component {
 
-    // state = {
-    //     showComp: false
-    // }
-
     render() {
         return (
             <div className='view-container'>
                 <PollList />
-                {/* {
-                    this.state.showComp 
-                        ? <PollList />
-                        : <Poll />
-                } */}
             </div>
         )
     }
