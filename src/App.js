@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
 // views and components
-import Nav from './components/Nav'
 import Home from './views/Home'
 import AddPoll from './views/AddPoll';
 import Leaderboard from './views/Leaderboard'
 import Login from './views/Login'
 import PollView from './views/PollView';
+import NavBar from './components/NavBar';
 
 
 class App extends Component {
@@ -16,7 +16,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
-          <Nav navType='1'/>
+          <NavBar />
           <Route exact path='/' render={ () => (
             <Home />
           )} />
