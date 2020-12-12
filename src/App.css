@@ -199,29 +199,6 @@ li.login {
 
 /* Leaderboard */
 
-/* Users */
-.user-item {
-  padding: 0.5rem;
-  display: flex;
-  flex-flow: row;
-  margin: 1rem auto;
-  border: 1px solid #dad7d7;
-  border-radius: 4px;
-  justify-content: flex-start;
-}
-
-.user-ranking{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 2rem 0 0;
-}
-.user-ranking span {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: rgba(37, 37, 37, 0.5);
-}
-
 .user-list-container .avatar-container {
   width: 40px;
   height: 40px;
@@ -235,13 +212,14 @@ li.login {
   align-items: center;
 }
 
-.user-info {
-  width: 88%;
-  margin: 10px;
+/* Log in */
+
+.login-container .login-btn {
+  margin: 1.5rem 0;
   display: flex;
-  flex-direction: column;
+  justify-content: flex-end;
 }
-.user-info .user-name {
-  font-weight: bold;
-  margin-right: 5px;
+
+.login-btn div {
+  width: 50%;
 }
