@@ -6,40 +6,13 @@ import { Avatar, Table, TableBody, TableCell, TableContainer, TableHead, TableRo
 import { withStyles } from '@material-ui/core/styles';
 // compose is to add withrouter, withStyles, and connect together
 import compose from 'recompose/compose'
+import UserListItem from './UserListItem';
 
 class LeaderboardList extends Component {
 
-    createUser = (ranking, avatarURL, name, pollsTaken, pollsAsked ) => {
-        const score = pollsTaken + pollsAsked
-        return { ranking, avatarURL, name, pollsTaken, pollsAsked, score }
-    }
-
     render() {
-
-        const userRows = [
-            this.createUser(
-                1,
-                'https://gravatar.com/avatar/53e885e728fb74819fade7a7aaf0d1df?s=400&d=robohash&r=x',
-                'Sarah Edo',
-                4,
-                1
-            ),
-            this.createUser(
-                2,
-                'https://gravatar.com/avatar/d7f22e9a1b376b88578391e75204a9b3?s=400&d=robohash&r=x',
-                'Tyler McGinnis',
-                3,
-                2
-            ),
-            this.createUser(
-                3,
-                'https://gravatar.com/avatar/90e832b87dc32a1741b5e30afd452824?s=400&d=robohash&r=x',
-                'John Doe',
-                3,
-                2
-            )
-
-        ]
+        
+        const { userIDs } = this.props
 
         return (
             <Fragment>
@@ -57,21 +30,11 @@ class LeaderboardList extends Component {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {userRows.map((row) => (
-                                    <TableRow key={row.name}>
-                                        <TableCell component="th" scope="row">{row.ranking}</TableCell>
-                                        <TableCell>
-                                            <div className='username-row'>
-                                                <div className='avatar-container'>
-                                                    <Avatar alt={row.name} src={row.avatarURL}/>
-                                                </div>
-                                                {row.name}
-                                            </div>
-                                        </TableCell>
-                                        <TableCell align="right">{row.pollsTaken}</TableCell>
-                                        <TableCell align="right">{row.pollsAsked}</TableCell>
-                                        <TableCell align="right">{row.score}</TableCell>
-                                    </TableRow>
+                                {userIDs.map((userID) => (
+                                    <UserListItem 
+                                        index={userIDs.indexOf(userID)}
+                                        key={userID}
+                                        id={userID}/>
                                 ))}
                             </TableBody>
                         </Table>
@@ -88,9 +51,14 @@ const styles = theme => ({
     },
 });
 
-const mapStateToProps = ({ authedUser }) => {
+const mapStateToProps = ({ users }) => {
+    // return an array of user ids, already sorted from higher to lower ranking
+    const userIDs = Object.keys(users).sort((a, b) => (
+        (Object.keys(users[b].answers).length + users[b].questions.length) - (Object.keys(users[a].answers).length + users[a].questions.length)
+    ))
+    
     return {
-        authedUser
+        userIDs      
     }
 }
 
