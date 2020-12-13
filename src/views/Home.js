@@ -9,29 +9,28 @@ import PollList from '../components/PollList';
 class Home extends Component {
 
     render() {
-        console.log('props in Home: ', this.props)
-        
+
         const { authedUser } = this.props
 
         return (
             <div className='view-container'>
                 {
-                    authedUser !== null 
-                    ? <PollList />
-                    : <Redirect to='/login' />
+                    authedUser !== null
+                        ? <PollList />
+                        : <Redirect to='/login' />
                 }
             </div>
         )
     }
 }
 
-const mapStateToProps = ( {authedUser} ) => {
-    return { 
-      authedUser
+const mapStateToProps = ({ authedUser }) => {
+    return {
+        authedUser
     }
-  }
-  
-  export default connect(
+}
+
+export default connect(
     mapStateToProps
-  )(Home);
+)(Home);
 

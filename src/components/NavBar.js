@@ -8,7 +8,6 @@ import { AppBar, Toolbar, Typography, Button, IconButton } from '@material-ui/co
 import AccountCircle from '@material-ui/icons/AccountCircle'
 // compose is to add withrouter, withStyles, and connect together
 import compose from 'recompose/compose'
-import actionTypes from '../actions/actionTypes';
 
 class NavBar extends Component {
 

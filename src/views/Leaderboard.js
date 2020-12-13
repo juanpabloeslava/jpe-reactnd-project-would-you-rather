@@ -1,7 +1,12 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
+import { Redirect } from 'react-router-dom'
+// reducers
+import { connect } from 'react-redux'
 // material UI imports
 import { Avatar, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+// compose is to add withrouter, withStyles, and connect together
+import compose from 'recompose/compose'
 
 class Leaderboard extends Component {
 
@@ -15,6 +20,8 @@ class Leaderboard extends Component {
     }
 
     render() {
+
+        const { authedUser } = this.props
 
         const userRows = [
             this.createUser(
@@ -43,50 +50,67 @@ class Leaderboard extends Component {
 
         return (
             <div className='view-container'>
-                <h3 className='center'>Leaderboard</h3>
-                <div className='user-list-container'>
-                    <TableContainer component={Paper}>
-                        <Table className={this.props.classes.table} aria-label="simple table">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>Ranking</TableCell>
-                                    <TableCell>User</TableCell>
-                                    <TableCell align="right">Polls Taken</TableCell>
-                                    <TableCell align="right">Polls created</TableCell>
-                                    <TableCell align="right">Final Score</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {userRows.map((row) => (
-                                    <TableRow key={row.name}>
-                                        <TableCell component="th" scope="row">{row.ranking}</TableCell>
-                                        <TableCell>
-                                            <div className='username-row'>
-                                                <div className='avatar-container'>
-                                                    <Avatar alt={row.name} src={row.avatarURL}/>
-                                                </div>
-                                                {row.name}
-                                            </div>
-                                        </TableCell>
-                                        <TableCell align="right">{row.pollsTaken}</TableCell>
-                                        <TableCell align="right">{row.pollsAsked}</TableCell>
-                                        <TableCell align="right">{row.score}</TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                </div>
+                {
+                    authedUser !== null
+                    ? <Fragment>
+                        <h3 className='center'>Leaderboard</h3>
+                        <div className='user-list-container'>
+                            <TableContainer component={Paper}>
+                                <Table className={this.props.classes.table} aria-label="simple table">
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell>Ranking</TableCell>
+                                            <TableCell>User</TableCell>
+                                            <TableCell align="right">Polls Taken</TableCell>
+                                            <TableCell align="right">Polls created</TableCell>
+                                            <TableCell align="right">Final Score</TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {userRows.map((row) => (
+                                            <TableRow key={row.name}>
+                                                <TableCell component="th" scope="row">{row.ranking}</TableCell>
+                                                <TableCell>
+                                                    <div className='username-row'>
+                                                        <div className='avatar-container'>
+                                                            <Avatar alt={row.name} src={row.avatarURL}/>
+                                                        </div>
+                                                        {row.name}
+                                                    </div>
+                                                </TableCell>
+                                                <TableCell align="right">{row.pollsTaken}</TableCell>
+                                                <TableCell align="right">{row.pollsAsked}</TableCell>
+                                                <TableCell align="right">{row.score}</TableCell>
+                                            </TableRow>
+                                        ))}
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                        </div>
+                    </Fragment>
+                    : <Redirect to='/login' />
+                }
+                
             </div>
         )
     }
 }
 
-const useStyles = theme => ({
+const styles = theme => ({
     table: {
         minWidth: 650,
     },
 });
 
-export default withStyles(useStyles, { withTheme: true })(Leaderboard)
+const mapStateToProps = ({ authedUser }) => {
+    return {
+        authedUser
+    }
+}
+
+export default compose(
+    withStyles(styles, { withTheme: true }),
+    connect(mapStateToProps)
+)(Leaderboard)
+
 
