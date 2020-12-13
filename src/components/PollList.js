@@ -8,7 +8,8 @@ import { TabContext, TabList, TabPanel } from '@material-ui/lab';
 class PollList extends Component {
 
     state = {
-        value: 0
+        // value must be a string otherwise <TabContext/> throws an error
+        value: '0'
     }
 
     handleTabChange = (e, val) => {
@@ -30,11 +31,11 @@ class PollList extends Component {
                         <TabContext value={value}>
                             <AppBar position="static">
                                 <TabList onChange={this.handleTabChange}>
-                                    <Tab label="Unanswered Polls" value={0}/>
-                                    <Tab label="Answered Polls" value={1}/>
+                                    <Tab label="Unanswered Polls" value='0'/>
+                                    <Tab label="Answered Polls" value='1'/>
                                 </TabList>
                             </AppBar>
-                            <TabPanel value={0}>
+                            <TabPanel value='0'>
                                 <div>
                                     <ul className='no-padding no-margin'>
                                         <PollListItem temp='1'/>
@@ -44,7 +45,7 @@ class PollList extends Component {
                                     </ul>
                                 </div>
                             </TabPanel>
-                            <TabPanel value={1}>
+                            <TabPanel value='1'>
                                 <div>
                                     <ul>
                                         <PollListItem temp='5'/>
