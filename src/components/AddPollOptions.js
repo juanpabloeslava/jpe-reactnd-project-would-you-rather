@@ -11,6 +11,8 @@ class AddPollOptions extends Component {
         submited: false
     }
 
+    toHome = () => this.props.history.push(`/`)
+
     handleChange = (event) => {
         if (event.target.name === 'optionOne' ) {
             this.setState(() => {
@@ -56,7 +58,7 @@ class AddPollOptions extends Component {
                                 <Button type="submit" className='MuiButton-outlined'>Submit Poll</Button>
                             </div>
                             <div>
-                                <Button onClick={ () => this.props.toHome()} className='MuiButton-contained'>Cancel</Button>
+                                <Button onClick={this.toHome} className='MuiButton-contained'>Cancel</Button>
                             </div>
                         </div>
                     </Fragment>
