@@ -3,7 +3,6 @@ import PollListItem from '../components/PollListItem';
 // material imports
 import {  AppBar, Tab } from '@material-ui/core';
 import { TabContext, TabList, TabPanel } from '@material-ui/lab';
-import { withStyles } from '@material-ui/core/styles';
 
 
 class PollList extends Component {
@@ -23,17 +22,16 @@ class PollList extends Component {
     render() {
 
         const { value } = this.state
-        const { classes } = this.props
 
         return (
                 <div className='list-container'>
                     <h3 className='center'>Ongoing Polls</h3>
-                    <div className={classes.root}>
+                    <div className='poll-tabs-container'>
                         <TabContext value={value}>
                             <AppBar position="static">
                                 <TabList onChange={this.handleTabChange}>
-                                    <Tab label="Uanswered Questions" value={0}/>
-                                    <Tab label="Answered Questions" value={1}/>
+                                    <Tab label="Unanswered Polls" value={0}/>
+                                    <Tab label="Answered Polls" value={1}/>
                                 </TabList>
                             </AppBar>
                             <TabPanel value={0}>
@@ -61,11 +59,4 @@ class PollList extends Component {
     }
 }
 
-const useStyles = theme => ({
-    root: {
-        flexGrow: 1,
-        backgroundColor: theme.palette.background.paper,
-    },
-});
-
-export default withStyles(useStyles, {withTheme: true})(PollList)
+export default PollList
