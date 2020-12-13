@@ -1,4 +1,4 @@
-import actionTypes from '..//actions/actionTypes'
+import actionTypes from '../actions/actionTypes'
 
 // initialize authedUser as null
 export default function authedUserRed ( state = null, action ) {

@@ -1,9 +1,11 @@
-import actionTypes from './actionTypes'
+import actionTypes from '../actions/actionTypes'
 
-// to dispatch once the getInitialData() Promise has resolved, to pass the retrieved users
-export function getUsers (users) {
-    return {
-        type: actionTypes.GET_USERS,
-        users
+// initialize users as an empty object
+export default function usersRed ( state = {}, action ) {
+    switch (action.type) {
+        case actionTypes.GET_USERS :
+            return action.users
+        default :
+            return state
     }
 }

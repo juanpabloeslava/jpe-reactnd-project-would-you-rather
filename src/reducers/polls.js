@@ -1,10 +1,11 @@
-import actionTypes from './actionTypes'
+import actionTypes from '../actions/actionTypes'
 
-// to dispatch once the getInitialData() Promise has resolved, to pass the retrieved polls
-
-export function getPolls (polls) {
-    return {
-        type: actionTypes.GET_POLLS,
-        polls
+// initialize polls as an empty object
+export default function pollsRed ( state = {}, action ) {
+    switch (action.type) {
+        case actionTypes.GET_POLLS :
+            return action.polls
+        default :
+            return state
     }
-}
+} 

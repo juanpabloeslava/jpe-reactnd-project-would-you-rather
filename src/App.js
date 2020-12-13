@@ -51,9 +51,11 @@ class App extends Component {
 
 // export default App
 
-const mapStateToProps = ( state ) => {
+const mapStateToProps = ( {authedUser, polls, users} ) => {
   return { 
-    authedUser: state.authedUser
+    authedUser,
+    polls,
+    users
   }
 }
 
