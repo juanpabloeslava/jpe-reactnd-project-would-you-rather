@@ -46,7 +46,10 @@ class Login extends Component {
                     {
                         // authedUser === null
                         activeUser === null
-                            ? <p>You are currently not logged in. Please select an user.</p>
+                            ? <div>
+                                <p>You are currently not logged in.</p>
+                                <p>To continue using the app, please select an user.</p>
+                            </div>
                             : <div>
                                 {/* this will need to be changed to the user's name */}
                                 <p>Hi there {activeUser.name.split(' ', 1)}.</p>

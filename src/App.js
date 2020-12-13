@@ -21,9 +21,7 @@ class App extends Component {
   }
   
   render() {
-    
-    const { authedUser } = this.props
-    
+
     return (
       <BrowserRouter>
         <div className="App">
@@ -48,8 +46,6 @@ class App extends Component {
     );
   }
 }
-
-// export default App
 
 const mapStateToProps = ( {authedUser, polls, users} ) => {
   return { 
