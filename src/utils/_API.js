@@ -15,10 +15,10 @@ export function getInitialData () {
     }))
   }
 
-export function addPoll (info) {
-    return _saveQuestion(info)
+export function addPoll (poll) {
+    return _saveQuestion(poll)
 }
 
-export function saveUserAnswer (info) {
-    return _saveQuestionAnswer(info)
+export function saveUserAnswer (answerInfo) {
+    return _saveQuestionAnswer(answerInfo)
 }
