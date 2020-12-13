@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import AddPollOptions from '../components/AddPollOptions'
 import AddPollForm from '../components/AddPollForm'
-import { withRouter, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 // reducers
 import { connect } from 'react-redux'
 

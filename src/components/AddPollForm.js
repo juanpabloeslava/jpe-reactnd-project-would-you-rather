@@ -1,8 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import AddPollOptions from '../components/AddPollOptions'
 import { withRouter } from 'react-router-dom'
-// material imports
-import { Button } from '@material-ui/core';
 
 class AddPollForm extends Component {
 
