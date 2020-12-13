@@ -21,12 +21,13 @@ class App extends Component {
   }
   
   render() {
-    console.log(this.props)
+    
     const { authedUser } = this.props
+    
     return (
       <BrowserRouter>
         <div className="App">
-          <NavBar />
+          <NavBar authedUser={authedUser}/>
           <Route exact path='/' render={ () => (
             <Home />
           )} />

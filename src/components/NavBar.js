@@ -18,15 +18,13 @@ class NavBar extends Component {
     
     render() {
         // by using withStyles(), it passes the defined styles as a property of the classes object, which is passed down to the Component as a prop 
-        const { classes } = this.props
+        const { classes, authedUser } = this.props
+        console.log('props in navBar: ', this.props)
         
         return (
             <div className={classes.root}>
                 <AppBar position="static">
                     <Toolbar>
-                        {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                            <MenuIcon />
-                        </IconButton> */}
                         <Button onClick={() => this.toHome()} className={classes.navItems} color="inherit">
                             Home
                         </Button>
@@ -37,10 +35,17 @@ class NavBar extends Component {
                             Leaderboard
                         </Button>
                         <Typography className={classes.space}/>
-                        <IconButton onClick={() => this.toLogin()} color="inherit" className={classes.login}>
-                            LOGIN
+                        { 
+                            authedUser === null 
+                            ? <IconButton onClick={() => this.toLogin()} color="inherit" className={classes.login}>
+                                LOGIN
+                                <AccountCircle className={classes.loginLogo}/>
+                            </IconButton>
+                            : <IconButton onClick={() => this.toLogin()} color="inherit" className={classes.login}>
+                            {authedUser}
                             <AccountCircle className={classes.loginLogo}/>
-                        </IconButton>
+                            </IconButton>
+                        }
                     </Toolbar>
                 </AppBar>
             </div>
