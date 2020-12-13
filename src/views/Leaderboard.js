@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { Redirect } from 'react-router-dom'
+import LeaderboardList from '../components/LeaderboardList'
 // reducers
 import { connect } from 'react-redux'
 // material UI imports
@@ -9,10 +10,6 @@ import { withStyles } from '@material-ui/core/styles';
 import compose from 'recompose/compose'
 
 class Leaderboard extends Component {
-
-    createData = (name, calories, fat, carbs, protein) => {
-        return { name, calories, fat, carbs, protein };
-    }
 
     createUser = (ranking, avatarURL, name, pollsTaken, pollsAsked ) => {
         const score = pollsTaken + pollsAsked
@@ -52,42 +49,7 @@ class Leaderboard extends Component {
             <div className='view-container'>
                 {
                     authedUser !== null
-                    ? <Fragment>
-                        <h3 className='center'>Leaderboard</h3>
-                        <div className='user-list-container'>
-                            <TableContainer component={Paper}>
-                                <Table className={this.props.classes.table} aria-label="simple table">
-                                    <TableHead>
-                                        <TableRow>
-                                            <TableCell>Ranking</TableCell>
-                                            <TableCell>User</TableCell>
-                                            <TableCell align="right">Polls Taken</TableCell>
-                                            <TableCell align="right">Polls created</TableCell>
-                                            <TableCell align="right">Final Score</TableCell>
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                        {userRows.map((row) => (
-                                            <TableRow key={row.name}>
-                                                <TableCell component="th" scope="row">{row.ranking}</TableCell>
-                                                <TableCell>
-                                                    <div className='username-row'>
-                                                        <div className='avatar-container'>
-                                                            <Avatar alt={row.name} src={row.avatarURL}/>
-                                                        </div>
-                                                        {row.name}
-                                                    </div>
-                                                </TableCell>
-                                                <TableCell align="right">{row.pollsTaken}</TableCell>
-                                                <TableCell align="right">{row.pollsAsked}</TableCell>
-                                                <TableCell align="right">{row.score}</TableCell>
-                                            </TableRow>
-                                        ))}
-                                    </TableBody>
-                                </Table>
-                            </TableContainer>
-                        </div>
-                    </Fragment>
+                    ? <LeaderboardList />
                     : <Redirect to='/login' />
                 }
                 
