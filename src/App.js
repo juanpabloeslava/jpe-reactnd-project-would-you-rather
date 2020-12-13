@@ -27,7 +27,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
-          <NavBar authedUser={authedUser}/>
+          <NavBar/>
           <Route exact path='/' render={ () => (
             <Home />
           )} />

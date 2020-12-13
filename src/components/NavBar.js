@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
+// reducers
+import { connect } from 'react-redux'
 // Material UI imports
 import { withStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography, Button, IconButton } from '@material-ui/core'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 // compose is to add withrouter, withStyles, and connect together
 import compose from 'recompose/compose'
+import actionTypes from '../actions/actionTypes';
 
 class NavBar extends Component {
     
@@ -18,8 +21,7 @@ class NavBar extends Component {
     
     render() {
         // by using withStyles(), it passes the defined styles as a property of the classes object, which is passed down to the Component as a prop 
-        const { classes, authedUser } = this.props
-        console.log('props in navBar: ', this.props)
+        const { classes, activeUser } = this.props
         
         return (
             <div className={classes.root}>
@@ -36,14 +38,14 @@ class NavBar extends Component {
                         </Button>
                         <Typography className={classes.space}/>
                         { 
-                            authedUser === null 
+                            activeUser === null
                             ? <IconButton onClick={() => this.toLogin()} color="inherit" className={classes.login}>
                                 LOGIN
                                 <AccountCircle className={classes.loginLogo}/>
                             </IconButton>
                             : <IconButton onClick={() => this.toLogin()} color="inherit" className={classes.login}>
-                            {authedUser}
-                            <AccountCircle className={classes.loginLogo}/>
+                                {activeUser.name.split(' ', 1)}
+                                <AccountCircle className={classes.loginLogo}/>
                             </IconButton>
                         }
                     </Toolbar>
@@ -77,6 +79,18 @@ const styles = theme => ({
     }
 });
 
+const mapStateToProps = ( {authedUser, users} ) => {
+
+    const activeUser = authedUser === null ? null : users[authedUser]
+
+    return { 
+      authedUser,
+      users,
+      activeUser
+    }
+  }
+
 export default compose(
-    withStyles(styles, { withTheme: true })
+    withStyles(styles, { withTheme: true }),
+    connect(mapStateToProps)
 )(withRouter(NavBar))
