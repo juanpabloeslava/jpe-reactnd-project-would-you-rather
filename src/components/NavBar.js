@@ -11,18 +11,18 @@ import compose from 'recompose/compose'
 import actionTypes from '../actions/actionTypes';
 
 class NavBar extends Component {
-    
+
     state = {}
 
     toHome = event => this.props.history.push(`/`)
     toAdd = event => this.props.history.push(`/add`)
     toLeaderboard = event => this.props.history.push(`/leaderboard`)
     toLogin = event => this.props.history.push(`/login`)
-    
+
     render() {
         // by using withStyles(), it passes the defined styles as a property of the classes object, which is passed down to the Component as a prop 
         const { classes, activeUser } = this.props
-        
+
         return (
             <div className={classes.root}>
                 <AppBar position="static">
@@ -36,17 +36,17 @@ class NavBar extends Component {
                         <Button onClick={() => this.toLeaderboard()} className={classes.navItems} color="inherit">
                             Leaderboard
                         </Button>
-                        <Typography className={classes.space}/>
-                        { 
+                        <Typography className={classes.space} />
+                        {
                             activeUser === null
-                            ? <IconButton onClick={() => this.toLogin()} color="inherit" className={classes.login}>
-                                LOGIN
-                                <AccountCircle className={classes.loginLogo}/>
-                            </IconButton>
-                            : <IconButton onClick={() => this.toLogin()} color="inherit" className={classes.login}>
-                                {activeUser.name.split(' ', 1)}
-                                <AccountCircle className={classes.loginLogo}/>
-                            </IconButton>
+                                ? <IconButton onClick={() => this.toLogin()} color="inherit" className={classes.login}>
+                                    LOGIN
+                                <AccountCircle className={classes.loginLogo} />
+                                </IconButton>
+                                : <IconButton onClick={() => this.toLogin()} color="inherit" className={classes.login}>
+                                    {activeUser.name.split(' ', 1)}
+                                    <AccountCircle className={classes.loginLogo} />
+                                </IconButton>
                         }
                     </Toolbar>
                 </AppBar>
@@ -79,16 +79,16 @@ const styles = theme => ({
     }
 });
 
-const mapStateToProps = ( {authedUser, users} ) => {
+const mapStateToProps = ({ authedUser, users }) => {
 
     const activeUser = authedUser === null ? null : users[authedUser]
 
-    return { 
-      authedUser,
-      users,
-      activeUser
+    return {
+        authedUser,
+        users,
+        activeUser
     }
-  }
+}
 
 export default compose(
     withStyles(styles, { withTheme: true }),

@@ -24,10 +24,10 @@ class Login extends Component {
 
     logIn = (event) => {
         event.preventDefault()
-        
+
         const { user } = this.state
-        
-        if ( user === 'logout') {
+
+        if (user === 'logout') {
             this.props.dispatch(userLogOut())
         } else {
             this.props.dispatch(setAuthedUser(user))
@@ -35,8 +35,8 @@ class Login extends Component {
     }
 
     render() {
-        console.log('props in login view: ', this.props)
-        const { classes, authedUser } = this.props
+
+        const { classes, activeUser } = this.props
         const { user } = this.state
 
         return (
@@ -44,13 +44,14 @@ class Login extends Component {
                 <h3 className='center'>Log in</h3>
                 <div className='login-container'>
                     {
-                        authedUser === null
-                        ? <p>You are currently not logged in. Please select an user.</p>
-                        : <div>
-                            {/* this will need to be changed to the user's name */}
-                            <p>Hi there {authedUser}.</p> 
-                            <p>You can switch accounts whenever you like, just select another user.</p>
-                        </div>
+                        // authedUser === null
+                        activeUser === null
+                            ? <p>You are currently not logged in. Please select an user.</p>
+                            : <div>
+                                {/* this will need to be changed to the user's name */}
+                                <p>Hi there {activeUser.name.split(' ', 1)}.</p>
+                                <p>You can switch accounts whenever you like, just select another user.</p>
+                            </div>
                     }
                     <FormControl className={classes.formControl}>
                         <InputLabel>User</InputLabel>
@@ -68,7 +69,7 @@ class Login extends Component {
                                     </Button>
                                 )}
                                 {user !== '' && (
-                                    <Button fullWidth onClick={ (e) => this.logIn(e) } className='MuiButton-containedPrimary'>
+                                    <Button fullWidth onClick={(e) => this.logIn(e)} className='MuiButton-containedPrimary'>
                                         Log in
                                     </Button>
                                 )}
@@ -91,11 +92,17 @@ const styles = theme => ({
     },
 });
 
-const mapStateToProps = ( state ) => {
-    return { 
-      authedUser: state.authedUser
+
+const mapStateToProps = ({ authedUser, users }) => {
+
+    const activeUser = authedUser === null ? null : users[authedUser]
+
+    return {
+        authedUser,
+        users,
+        activeUser
     }
-  }
+}
 
 export default compose(
     withStyles(styles, { withTheme: true }),
