@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
+// actions
+import { fetchInitialDataAsync } from './actions'
+// reducers
+import { connect } from 'react-redux'
 // views and components
 import Home from './views/Home'
 import AddPoll from './views/AddPoll';
@@ -11,8 +15,14 @@ import NavBar from './components/NavBar';
 
 
 class App extends Component {
+
+  componentDidMount() {
+    this.props.dispatch(fetchInitialDataAsync()) 
+  }
   
   render() {
+    console.log(this.props)
+    const { authedUser } = this.props
     return (
       <BrowserRouter>
         <div className="App">
@@ -38,4 +48,14 @@ class App extends Component {
   }
 }
 
-export default App;
+// export default App
+
+const mapStateToProps = ( state ) => {
+  return { 
+    authedUser: state.authedUser
+  }
+}
+
+export default connect(
+  mapStateToProps
+)(App);

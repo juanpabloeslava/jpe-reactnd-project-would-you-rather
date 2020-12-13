@@ -1,6 +1,6 @@
 import { setAuthedUser, userLogOut } from './authedUser'
 import { getUsers } from './users'
-import { getPolls } from './poll'
+import { getPolls } from './polls'
 // api imports
 import { getInitialData, addPoll, saveUserAnswer } from '../utils/_API'
 
