@@ -12,7 +12,11 @@ class LeaderboardList extends Component {
 
     render() {
         
-        const { userIDs } = this.props
+        const { users } = this.props
+        // return an array of user ids, already sorted from higher to lower ranking
+        const userIDs = Object.keys(users).sort((a, b) => (
+            (Object.keys(users[b].answers).length + users[b].questions.length) - (Object.keys(users[a].answers).length + users[a].questions.length)
+        ))
 
         return (
             <Fragment>
@@ -48,17 +52,12 @@ class LeaderboardList extends Component {
 const styles = theme => ({
     table: {
         minWidth: 650,
-    },
+    }
 });
 
 const mapStateToProps = ({ users }) => {
-    // return an array of user ids, already sorted from higher to lower ranking
-    const userIDs = Object.keys(users).sort((a, b) => (
-        (Object.keys(users[b].answers).length + users[b].questions.length) - (Object.keys(users[a].answers).length + users[a].questions.length)
-    ))
-    
     return {
-        userIDs      
+        users      
     }
 }
 

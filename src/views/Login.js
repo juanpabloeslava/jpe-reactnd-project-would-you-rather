@@ -101,7 +101,6 @@ const mapStateToProps = ({ authedUser, users }) => {
     const activeUser = authedUser === null ? null : users[authedUser]
 
     return {
-        authedUser,
         users,
         activeUser
     }
