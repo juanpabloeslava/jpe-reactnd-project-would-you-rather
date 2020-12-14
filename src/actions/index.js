@@ -1,9 +1,10 @@
 import { setAuthedUser, userLogOut } from './authedUser'
 import { getUsers } from './users'
-import { getPolls } from './polls'
+import { getPolls, answerPoll } from './polls'
 import { showLoading, hideLoading } from 'react-redux-loading-bar'
 // api imports
-import { getInitialData, addPoll, saveUserAnswer } from '../utils/_API'
+import { getInitialData, saveUserAnswer } from '../utils/_API'
+import { _saveQuestionAnswer } from '../utils/_DATA'
 
 
 // initial id
@@ -23,5 +24,13 @@ export const fetchInitialDataAsync = () => (dispatch) => {
         })
         .catch( e => {
             console.log('there was an error fetching the initial data: ', e)
+        })
+}
+
+export const answerPollAsync = (info) => (dispatch) => {
+    // return promise from API
+    return _saveQuestionAnswer(info)
+        .then( () => {
+            dispatch(answerPoll(info))
         })
 }

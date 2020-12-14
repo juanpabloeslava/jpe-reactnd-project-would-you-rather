@@ -1,9 +1,15 @@
 import React, { Component, Fragment } from 'react'
 import PollPercentage from './PollPercentage'
+// import { saveUserAnswer } from '../utils/_API'
+import { withRouter } from 'react-router-dom'
+// actions
+import { answerPollAsync } from '../actions'
+// reducers
+import { connect } from 'react-redux'
 // material UI imports
 import { Radio, RadioGroup, FormControl, FormControlLabel, Button } from '@material-ui/core';
 
-class PollOption extends Component {
+class PollOptions extends Component {
 
     state = {
         value: '',
@@ -19,11 +25,18 @@ class PollOption extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         const { value } = this.state
+        const { dispatch, authedUser, id } = this.props
+        console.log('authedUser: ', authedUser)
         // deactivate options and submit button
         this.setState(prevState => {
             return { submited: !prevState.submited };
         });
-        console.log('form submited:', value)
+        // dispatch answer action
+        dispatch(answerPollAsync({
+            authedUser: authedUser,
+            qid: id,
+            answer: value
+        }))
         // show results from poll
         this.props.showResult(value);
     };
@@ -34,7 +47,7 @@ class PollOption extends Component {
     }
 
     render() {
-
+        console.log('state at beginning of Poll options: ', this.props.state)
         const { optionOne,optionTwo } = this.props
         const { submited } = this.state
 
@@ -46,12 +59,12 @@ class PollOption extends Component {
                         submited === true && (
                             <Fragment>
                                 <RadioGroup name="option" value={this.state.value} onChange={this.handleChange}>
-                                    <FormControlLabel disabled value={optionOne} control={<Radio />} label={optionOne} />
+                                    <FormControlLabel disabled value='optionOne' control={<Radio />} label={optionOne} />
                                     <PollPercentage 
                                         selected={true}
                                         people={2}
                                         percentage={this.findPercentage(2)}/>
-                                    <FormControlLabel disabled value={optionTwo} control={<Radio />} label={optionTwo} />
+                                    <FormControlLabel disabled value='optionTwo' control={<Radio />} label={optionTwo} />
                                     <PollPercentage 
                                         selected={false}
                                         people={1}
@@ -68,9 +81,9 @@ class PollOption extends Component {
                     {
                         submited === false && (
                             <Fragment>
-                                <RadioGroup aria-label="gender" name="option" value={this.state.value} onChange={this.handleChange}>
-                                    <FormControlLabel value={optionOne} control={<Radio />} label={optionOne} />
-                                    <FormControlLabel value={optionTwo} control={<Radio />} label={optionTwo} />
+                                <RadioGroup name="option" value={this.state.value} onChange={this.handleChange}>
+                                    <FormControlLabel value='optionOne' control={<Radio />} label={optionOne} />
+                                    <FormControlLabel value='optionTwo' control={<Radio />} label={optionTwo} />
                                 </RadioGroup>
                                 <div>
                                     <div className='poll-submit-btn'>
@@ -87,4 +100,16 @@ class PollOption extends Component {
 
 }
 
-export default PollOption
+// const mapStateToProps = ({ authedUser }, ownProps) => {
+const mapStateToProps = (state, ownProps) => {
+    const id = ownProps.match.params.id
+    return {
+        state,
+        authedUser: state.authedUser,
+        id
+    }
+}
+
+export default withRouter(
+    connect(mapStateToProps)(PollOptions)
+)

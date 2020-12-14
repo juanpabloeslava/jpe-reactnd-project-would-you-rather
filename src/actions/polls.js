@@ -8,3 +8,12 @@ export function getPolls (polls) {
         polls
     }
 }
+
+export function answerPoll ({ authedUser, qid, answer }) {
+    return {
+        type: actionTypes.ANSWER_POLL,
+        authedUser,
+        qid,
+        answer
+    }
+}
