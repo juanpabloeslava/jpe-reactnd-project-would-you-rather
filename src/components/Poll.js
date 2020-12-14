@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { formatDate } from '../utils/helpers'
 import PollOptions from './PollOptions'
-import { withRouter } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 // reducers
 import { connect } from 'react-redux'
 // material imports
@@ -33,11 +33,15 @@ class Poll extends Component {
         const { alreadyAnswered, answer } = this.state
         const { authedUser, polls, users } = this.props
         const id = this.props.match.params.id
-
         const poll = polls[id]
+        
+        // if there isn't a poll 
+        if (poll === undefined) {
+            return <Redirect to='/login' />
+        }
+
         const author = users[poll.author]
         const displayName = author.id === authedUser ? 'You' : author.name
-        
 
         return (
             <div className='list-container'>
