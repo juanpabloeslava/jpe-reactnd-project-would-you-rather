@@ -32,6 +32,8 @@ class Login extends Component {
         } else {
             this.props.dispatch(setAuthedUser(user))
         }
+
+        this.props.history.push(`/`)
     }
 
     render() {
@@ -41,7 +43,7 @@ class Login extends Component {
 
         return (
             <div className='view-container'>
-                <h3 className='center'>Log in</h3>
+                <h3 className='center'>{ activeUser === null ? 'Log in' : `Logged in as ${activeUser.name}`}</h3>
                 <div className='login-container'>
                     {
                         // authedUser === null
