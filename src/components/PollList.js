@@ -28,13 +28,14 @@ class PollList extends Component {
         const { value } = this.state
         const { users, polls, authedUser } = this.props
 
-        const allPollIDs = Object.keys(polls) 
-        // active user
-        const activeUser = authedUser ? users[authedUser] : null
-        // list of poll ids the user has answered, sorted from newer to oldest
-        const answeredPolls = Object.keys(activeUser.answers).sort( (a, b) => (
+        const allPollIDs = Object.keys(polls).sort( (a, b) => (
             polls[b].timestamp - polls[a].timestamp
         ))
+        
+        // active user
+        const activeUser = authedUser ? users[authedUser] : null
+        // list of poll ids the user has answered
+        const answeredPolls = allPollIDs.filter( poll => Object.keys(activeUser.answers).includes(poll))
         // polls user hasn't answered (an array of ids that doesn't include the ones already answered. This is already sorted, since it uses allPolls as its base)
         const unansweredPolls = allPollIDs.filter( poll => !answeredPolls.includes(poll))
         // same as before, but safe for Internet Explor, since array.includes() is not supported by IE
@@ -67,7 +68,7 @@ class PollList extends Component {
                                 <ul className='no-padding no-margin'>
                                     {
                                         answeredPolls.map( poll => (
-                                            <PollListItem key={poll} pollID={poll}/>
+                                            <PollListItem key={poll} id={poll}/>
                                         ))
                                     }
                                 </ul>

@@ -7,19 +7,24 @@ import { connect } from 'react-redux'
 class PollListItem extends Component {
 
     render() {
-        console.log('props in Poll List Item Comp: ', this.props)
-        return ( 
+
+        const { authedUser, polls, users, id} = this.props
+
+        const poll = polls[id]
+        const author = users[poll.author]
+        const displayName = author.id === authedUser ? 'You' : author.name
+
+        return (
             <div>
-                {/* {this.props.temp} */}
                 <Link className='poll-list-item' to='/question'>
                     <div className='avatar-container'>
-                    <img alt='avatar of user' className='avatar' src={`https://gravatar.com/avatar/90e832b87dc32a1741b5e30afd452824?s=400&d=robohash&r=x`} />
+                        <img alt={`avatar of ${author.name}`} className='avatar' src={author.avatarURL} />
                     </div>
                     <div className='poll-info'>
                         <div>
-                            <span className='user-name'> Sarah asked</span>
-                            <div> {formatDate(1468479767190)} </div>
-                            <p> Would you rather <span>have horrible short term memory</span> or <span>have horrible long term memory</span>?</p>
+                            <span className='user-name'>{displayName} asked</span>
+                            <div> {formatDate(poll.timestamp)} </div>
+                            <p> Would you rather <span>{poll.optionOne.text}</span> or <span>{poll.optionTwo.text}</span>?</p>
                         </div>
                     </div>
                 </Link>
@@ -28,10 +33,11 @@ class PollListItem extends Component {
     }
 }
 
-// const mapStateToProps = ({ authedUser, polls, users }, {pollID}) => {
-const mapStateToProps = (state) => {
+const mapStateToProps = ({ authedUser, polls, users }) => {
     return {
-        state
+        authedUser,
+        polls,
+        users
     }
 }
 
