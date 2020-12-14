@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { formatDate } from '../utils/helpers'
 import PollOptions from './PollOptions'
 import { withRouter } from 'react-router-dom'
+// reducers
+import { connect } from 'react-redux'
 // material imports
 import { Button } from '@material-ui/core';
 
@@ -29,6 +31,13 @@ class Poll extends Component {
     render() {
 
         const { alreadyAnswered, answer } = this.state
+        const { authedUser, polls, users } = this.props
+        const id = this.props.match.params.id
+
+        const poll = polls[id]
+        const author = users[poll.author]
+        const displayName = author.id === authedUser ? 'You' : author.name
+        
 
         return (
             <div className='list-container'>
@@ -36,18 +45,18 @@ class Poll extends Component {
                 <div>
                     <div className='poll'>
                         <div className='avatar-container'>
-                            <img className='avatar' src={`https://gravatar.com/avatar/90e832b87dc32a1741b5e30afd452824?s=400&d=robohash&r=x`} />
+                            <img alt={`avatar of ${author.name}`} className='avatar' src={author.avatarURL} />
                         </div>
                         <div className='poll-info'>
                             <div>
-                                <span className='user-name'> Sarah asked</span>
-                                <div> {formatDate(1468479767190)} </div>
+                                <span className='user-name'>{displayName} asked</span>
+                                <div> {formatDate(poll.timestamp)} </div>
                                 <p> Would you rather: </p>
                                 <div className='poll-options'>
                                     <PollOptions 
                                         showResult={this.showResult}
-                                        optionOne='have horrible short term memory'
-                                        optionTwo='have horrible long term memory'/>
+                                        optionOne={poll.optionOne.text}
+                                        optionTwo={poll.optionTwo.text}/>
                                 </div>
                                 { alreadyAnswered && (
                                 <div>
@@ -72,5 +81,14 @@ class Poll extends Component {
     }
 }
 
+const mapStateToProps = ({ authedUser, polls, users }) => {
+    return {
+        authedUser,
+        polls,
+        users
+    }
+}
 
-export default withRouter(Poll)
+export default withRouter(
+    connect(mapStateToProps)(Poll)
+)
