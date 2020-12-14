@@ -7,6 +7,7 @@
 // npm install @material-ui/icons
 // npm install @material-ui/lab
 // npm install --save recompose
+// npm i react-redux-loading-bar
 
 import React from 'react';
 import ReactDOM from 'react-dom';

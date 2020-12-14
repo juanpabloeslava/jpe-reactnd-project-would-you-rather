@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
+import LoadingBar from 'react-redux-loading-bar'
 // actions
 import { fetchInitialDataAsync } from './actions'
 // reducers
@@ -24,25 +25,28 @@ class App extends Component {
 
     return (
       <BrowserRouter>
-        <div className="App">
-          <NavBar/>
-          <Route exact path='/' render={ () => (
-            <Home />
-          )} />
-          {/* ':id' referes to the poll's id */}
-          <Route exact path='/polls/:id' render={ () => (
-              <PollView />
-          )} />
-          <Route exact path='/add' render={ () => (
-            <AddPoll />
-          )} />
-          <Route exact path='/leaderboard' render={ () => (
-            <Leaderboard />
-          )} />
-          <Route exact path='/login' render={ () => (
-            <Login />
-          )} />
-        </div>
+        <Fragment>
+          <LoadingBar />
+          <div className="App">
+            <NavBar/>
+            <Route exact path='/' render={ () => (
+              <Home />
+            )} />
+            {/* ':id' referes to the poll's id */}
+            <Route exact path='/polls/:id' render={ () => (
+                <PollView />
+            )} />
+            <Route exact path='/add' render={ () => (
+              <AddPoll />
+            )} />
+            <Route exact path='/leaderboard' render={ () => (
+              <Leaderboard />
+            )} />
+            <Route exact path='/login' render={ () => (
+              <Login />
+            )} />
+          </div>
+        </Fragment>
       </BrowserRouter>
     );
   }
