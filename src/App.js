@@ -29,7 +29,8 @@ class App extends Component {
           <Route exact path='/' render={ () => (
             <Home />
           )} />
-          <Route exact path='/question' render={ () => (
+          {/* ':id' referes to the poll's id */}
+          <Route exact path='/polls/:id' render={ () => (
               <PollView />
           )} />
           <Route exact path='/add' render={ () => (

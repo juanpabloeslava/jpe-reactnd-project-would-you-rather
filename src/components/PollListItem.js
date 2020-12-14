@@ -16,7 +16,7 @@ class PollListItem extends Component {
 
         return (
             <div>
-                <Link className='poll-list-item' to='/question'>
+                <Link className='poll-list-item' to={`/polls/${id}`}>
                     <div className='avatar-container'>
                         <img alt={`avatar of ${author.name}`} className='avatar' src={author.avatarURL} />
                     </div>
