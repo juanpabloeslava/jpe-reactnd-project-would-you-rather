@@ -37,6 +37,8 @@ class PollList extends Component {
         ))
         // polls user hasn't answered (an array of ids that doesn't include the ones already answered. This is already sorted, since it uses allPolls as its base)
         const unansweredPolls = allPollIDs.filter( poll => !answeredPolls.includes(poll))
+        // same as before, but safe for Internet Explor, since array.includes() is not supported by IE
+        // const unansweredPolls = allPollIDs.filter( poll => answeredPolls.indexOf(poll) > -1)
 
         return (
             <div className='list-container'>
@@ -54,12 +56,9 @@ class PollList extends Component {
                                 <ul className='no-padding no-margin'>
                                     {
                                         unansweredPolls.map( poll => (
-                                            <PollListItem key={poll}/>
+                                            <PollListItem key={poll} id={poll}/>
                                         ))
                                     }
-                                    {/* <PollListItem />
-                                    <PollListItem />
-                                    <PollListItem /> */}
                                 </ul>
                             </div>
                         </TabPanel>
@@ -68,11 +67,9 @@ class PollList extends Component {
                                 <ul className='no-padding no-margin'>
                                     {
                                         answeredPolls.map( poll => (
-                                            <PollListItem key={poll}/>
+                                            <PollListItem key={poll} pollID={poll}/>
                                         ))
                                     }
-                                    {/* <PollListItem />
-                                    <PollListItem /> */}
                                 </ul>
                             </div>
                         </TabPanel>
