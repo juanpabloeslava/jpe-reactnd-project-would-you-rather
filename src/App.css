@@ -62,9 +62,6 @@ body {
 }
 
 /* nav */
-.nav-container {
-  /* position: absolute; */
-}
 
 .nav-container ul {
   display: flex;

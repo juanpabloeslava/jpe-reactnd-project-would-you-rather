@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 // reducers
 import { connect } from 'react-redux'
 // Material UI imports
@@ -11,11 +11,6 @@ import compose from 'recompose/compose'
 
 class NavBar extends Component {
 
-    toHome = event => this.props.history.push(`/`)
-    toAdd = event => this.props.history.push(`/add`)
-    toLeaderboard = event => this.props.history.push(`/leaderboard`)
-    toLogin = event => this.props.history.push(`/login`)
-
     render() {
         // by using withStyles(), it passes the defined styles as a property of the classes object, which is passed down to the Component as a prop 
         const { classes, activeUser } = this.props
@@ -24,27 +19,20 @@ class NavBar extends Component {
             <div className={classes.root}>
                 <AppBar position="static">
                     <Toolbar>
-                        <Button onClick={() => this.toHome()} className={classes.navItems} color="inherit">
+                        <Button component={Link} to='/' underline='none' className={classes.navItems} color="inherit">
                             Home
                         </Button>
-                        <Button onClick={() => this.toAdd()} className={classes.navItems} color="inherit" >
+                        <Button component={Link} to='/add' underline='none' className={classes.navItems} color="inherit" >
                             Add Poll
                         </Button>
-                        <Button onClick={() => this.toLeaderboard()} className={classes.navItems} color="inherit">
+                        <Button component={Link} to='/leaderboard' underline='none' className={classes.navItems} color="inherit">
                             Leaderboard
                         </Button>
                         <Typography className={classes.space} />
-                        {
-                            activeUser === null
-                                ? <IconButton onClick={() => this.toLogin()} color="inherit" className={classes.login}>
-                                    LOGIN
-                                <AccountCircle className={classes.loginLogo} />
-                                </IconButton>
-                                : <IconButton onClick={() => this.toLogin()} color="inherit" className={classes.login}>
-                                    {activeUser.name.split(' ', 1)}
-                                    <AccountCircle className={classes.loginLogo} />
-                                </IconButton>
-                        }
+                        <IconButton component={Link} to='/login' underline='none' color="inherit" className={classes.login}>
+                            { activeUser === null ? `LOGIN` : activeUser.name.split(' ', 1) } 
+                            <AccountCircle className={classes.loginLogo} />
+                        </IconButton>
                     </Toolbar>
                 </AppBar>
             </div>
