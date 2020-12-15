@@ -1,13 +1,17 @@
 import React, { Component, Fragment } from 'react'
 import { withRouter } from 'react-router-dom'
+// actions
+import { addPollAsync } from '../actions'
+// reducers
+import { connect } from 'react-redux'
 // material UI imports
 import { TextField, FormControl, Button } from '@material-ui/core';
 
 class AddPollOptions extends Component {
 
     state = {
-        optionOne: '',
-        optionTwo: '',
+        optionOneText: '',
+        optionTwoText: '',
         submited: false
     }
 
@@ -16,11 +20,11 @@ class AddPollOptions extends Component {
     handleChange = (event) => {
         if (event.target.name === 'optionOne' ) {
             this.setState(() => {
-                return { optionOne: event.target.value };
+                return { optionOneText: event.target.value };
             });
         } else if (event.target.name === 'optionTwo' ) {
             this.setState(() => {
-                return { optionTwo: event.target.value };
+                return { optionTwoText: event.target.value };
             });
         }
     };
@@ -28,10 +32,19 @@ class AddPollOptions extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        // const { optionOne, optionTwo } = this.state
-        console.log('new poll submited!')
-        // temporal: just go to home and do nothing
-        this.props.toHome();
+        const { optionOneText, optionTwoText } = this.state
+        const { authedUser, dispatch } = this.props
+        const author = authedUser
+        const newPoll = {
+            optionOneText,
+            optionTwoText,
+            author
+        }
+        // dispatch addPoll action
+        dispatch(addPollAsync(newPoll))
+        console.log('new poll submited: ', newPoll)
+        // go home
+        this.toHome();
     };
 
     render() {
@@ -69,4 +82,12 @@ class AddPollOptions extends Component {
 
 }
 
-export default withRouter(AddPollOptions)
+const mapStateToProps = ({ authedUser }) => {
+        return {
+            authedUser
+        }
+    }
+
+export default withRouter(
+    connect(mapStateToProps)(AddPollOptions)
+)

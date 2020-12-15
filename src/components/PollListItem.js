@@ -24,7 +24,7 @@ class PollListItem extends Component {
                         <div>
                             <span className='user-name'>{displayName} asked</span>
                             <div> {formatDate(poll.timestamp)} </div>
-                            <p> Would you rather <span>{poll.optionOne.text}</span> or <span>{poll.optionTwo.text}</span>?</p>
+                            <p> Would you rather <span>{ poll ? poll.optionOne.text : 'undefined' }</span> or <span>{ poll ? poll.optionTwo.text : 'undefined' }</span>?</p>
                         </div>
                     </div>
                 </Link>

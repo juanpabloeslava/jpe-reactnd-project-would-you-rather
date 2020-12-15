@@ -17,6 +17,15 @@ export default function usersRed ( state = {}, action ) {
                     }
                 }
             }
+        case actionTypes.ADD_POLL :
+            const { question } = action
+            return {
+                ...state,
+                [question.author]: {
+                    ...state[question.author],
+                    questions: state[question.author].questions.concat([question.id])
+                }
+            }
         default :
             return state
     }

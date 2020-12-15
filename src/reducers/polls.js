@@ -18,6 +18,12 @@ export default function pollsRed(state = {}, action) {
                     }
                 }
             }
+        case actionTypes.ADD_POLL :
+            const { question } = action
+            return {
+                ...state,
+                [question.id]: question
+            }
         default :
             return state
     }

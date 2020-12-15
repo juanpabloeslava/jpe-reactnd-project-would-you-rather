@@ -1,9 +1,9 @@
 import { setAuthedUser, userLogOut } from './authedUser'
 import { getUsers } from './users'
-import { getPolls, answerPoll } from './polls'
+import { getPolls, answerPoll, addPoll } from './polls'
 import { showLoading, hideLoading } from 'react-redux-loading-bar'
 // api imports
-import { getInitialData, saveUserAnswer } from '../utils/_API'
+import { getInitialData, saveUserAnswer, saveQuestion } from '../utils/_API'
 import { _saveQuestionAnswer } from '../utils/_DATA'
 
 
@@ -35,4 +35,15 @@ export const answerPollAsync = (info) => (dispatch) => {
             dispatch(answerPoll(info))
             dispatch(hideLoading())
         })
+}
+
+export const addPollAsync = (poll) => (dispatch) => {
+    dispatch(showLoading())
+    // return promise from API
+    return saveQuestion(poll)
+        .then( (poll) => {
+            dispatch(addPoll(poll))
+            dispatch(hideLoading())
+        })
+        .catch()
 }

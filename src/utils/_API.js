@@ -15,7 +15,7 @@ export function getInitialData () {
     }))
   }
 
-export function addPoll (poll) {
+export function saveQuestion (poll) {
     return _saveQuestion(poll)
 }
 

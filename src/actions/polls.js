@@ -18,11 +18,9 @@ export function answerPoll ({ authedUser, qid, answer }) {
     }
 }
 
-export function addPoll ({ optionOneText, optionTwoText, author }) {
+export function addPoll ( question ) {
     return {
         type: actionTypes.ADD_POLL,
-        optionOneText, 
-        optionTwoText,
-        author
+        question
     }
 }
