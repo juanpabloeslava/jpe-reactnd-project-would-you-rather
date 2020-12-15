@@ -9,39 +9,31 @@ import { Button } from '@material-ui/core';
 
 class Poll extends Component {
 
-    state = {
-        answer: ''
-    }
-
-    showResult = (answer)  => {
-        this.setState(() => {
-            return { 
-                alreadyAnswered: true,
-                answer
-            };
-        });
-    }
-
     toHome = e => this.props.history.push(`/`)
 
     render() {
 
-        const { alreadyAnswered, answer } = this.state
         const { authedUser, polls, users } = this.props
         const id = this.props.match.params.id
         const poll = polls[id]
-        
-        // if there isn't a poll, go to login
-        if (poll === undefined) {
+
+        // if there isn't a poll or there isn't an authedUser, go to login
+        if (poll === undefined || authedUser === undefined) {
             return <Redirect to='/login' />
         }
-        
+
         const author = users[poll.author]
         const displayName = author.id === authedUser ? 'You' : author.name
         
-        // check if this poll has been answered by the active user
+        // check if this poll has been answered by the authed user
         const totalVotes = poll.optionOne.votes.concat(poll.optionTwo.votes)
         const answered = totalVotes.includes(authedUser) ? true : false
+
+        // which was the answer?
+        const activeUser = users[authedUser]
+        const thisPollAnswer = activeUser.answers[poll.id]          //outputs either 'optionOne' or 'optionTwo'
+        console.log('active user: ', activeUser)
+        console.log('thisPollAnswer: ', thisPollAnswer)
 
         return (
             <div className='list-container'>
@@ -65,7 +57,7 @@ class Poll extends Component {
                                 { answered && (
                                 <div>
                                     {/* <p> You chose: </p> */}
-                                    <span className='submission-summary'>You would rather { answer === 'optionOne' ? poll.optionOne.text : poll.optionTwo.text }</span>
+                                    <span className='submission-summary'>You would rather { thisPollAnswer === 'optionOne' ? poll.optionOne.text : 'optionTwo' ? poll.optionTwo.text : 'not say' }</span>
                                     <div className='poll-btns'>
                                         <div>
                                             <Button onClick={ () => this.toHome()} className='MuiButton-contained'>Back to Polls</Button>

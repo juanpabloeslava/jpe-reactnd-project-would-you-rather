@@ -13,7 +13,6 @@ class PollOptions extends Component {
 
     state = {
         value: '',
-        // submited: false
     }
 
     handleChange = (event) => {
@@ -32,8 +31,6 @@ class PollOptions extends Component {
             qid: id,
             answer: value
         }))
-        // show results from poll
-        this.props.showResult(value);
     };
 
     findPercentage = (val)  => {
@@ -43,37 +40,25 @@ class PollOptions extends Component {
 
     render() {
 
-        const { optionOne, optionTwo, polls, authedUser, id } = this.props
+        const { users, optionOne, optionTwo, polls, authedUser, id } = this.props
 
         const poll = polls[id]
         
-        // check if this poll has been answered by the active user
+        // check if this poll has been answered by the authenticated user
         const totalVotes = poll.optionOne.votes.concat(poll.optionTwo.votes)
+        console.log('poll: ', poll)
         const answered = totalVotes.includes(authedUser) ? true : false
         
+        // display option as checked
+        const activeUser = users[authedUser]
+        const thisPollAnswer = activeUser.answers[poll.id]
+        
+        // const checkOption = answered ? value === '' 
 
         return (
             <form onSubmit={this.handleSubmit}>
                 {/* modify FormControl width to 100% otherwise all goes to shit */}
                 <FormControl component="fieldset" className='MuiFormControl-fullWidth'>
-                    {
-                        answered && (
-                            <Fragment>
-                                <RadioGroup name="option" value={this.state.value} onChange={this.handleChange}>
-                                    <FormControlLabel disabled value='optionOne' control={<Radio />} label={optionOne} />
-                                    <PollPercentage 
-                                        selected={true}
-                                        people={2}
-                                        percentage={this.findPercentage(2)}/>
-                                    <FormControlLabel disabled value='optionTwo' control={<Radio />} label={optionTwo} />
-                                    <PollPercentage 
-                                        selected={false}
-                                        people={1}
-                                        percentage={this.findPercentage(1)}/>
-                                </RadioGroup>
-                            </Fragment>
-                        )
-                    }
                     {
                         !answered && (
                             <Fragment>
@@ -89,6 +74,27 @@ class PollOptions extends Component {
                             </Fragment>
                         )
                     }
+                    {
+                        answered && (
+                            <Fragment>
+                                <RadioGroup name="option" value={this.state.value} onChange={this.handleChange}>
+                                    <FormControlLabel 
+                                        disabled value='optionOne' label={optionOne} 
+                                        control={
+                                            <Radio />}/>
+                                    <PollPercentage 
+                                        selected={true}
+                                        people={2}
+                                        percentage={this.findPercentage(2)}/>
+                                    <FormControlLabel disabled value='optionTwo' control={<Radio />} label={optionTwo} />
+                                    <PollPercentage 
+                                        selected={false}
+                                        people={1}
+                                        percentage={this.findPercentage(1)}/>
+                                </RadioGroup>
+                            </Fragment>
+                        )
+                    }
                 </FormControl>
             </form>
         );
@@ -96,13 +102,14 @@ class PollOptions extends Component {
 
 }
 
-const mapStateToProps = ({ polls, authedUser }, ownProps) => {
+const mapStateToProps = ({ polls, authedUser, users }, ownProps) => {
 // const mapStateToProps = (state, ownProps) => {
     const id = ownProps.match.params.id
     return {
         polls,
         authedUser,
-        id
+        id,
+        users
     }
 }
 
