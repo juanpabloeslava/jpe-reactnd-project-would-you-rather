@@ -56,9 +56,14 @@ class PollList extends Component {
                             <div>
                                 <ul className='no-padding no-margin'>
                                     {
-                                        unansweredPolls.map( poll => (
-                                            <PollListItem key={poll} id={poll}/>
-                                        ))
+                                        unansweredPolls.length < 1 
+                                            ? <div>
+                                                <p>It seems you're all caught up.</p>
+                                                <p>Check your previous answers or create a new Poll.</p>
+                                            </div>
+                                            : unansweredPolls.map( poll => (
+                                                <PollListItem key={poll} id={poll}/>
+                                            ))
                                     }
                                 </ul>
                             </div>
