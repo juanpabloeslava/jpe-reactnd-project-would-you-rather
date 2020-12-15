@@ -52,14 +52,12 @@ class Login extends Component {
                 <h3 className='center'>{ activeUser === null ? 'Log in' : `Logged in as ${activeUser.name}`}</h3>
                 <div className='login-container'>
                     {
-                        // authedUser === null
                         activeUser === null
                             ? <div>
                                 <p>You are currently not logged in.</p>
                                 <p>To continue using the app, please select an user.</p>
                             </div>
                             : <div>
-                                {/* this will need to be changed to the user's name */}
                                 <p>Hi there {activeUser.name.split(' ', 1)}.</p>
                                 <p>You can switch accounts whenever you like, just select another user.</p>
                             </div>
@@ -70,7 +68,6 @@ class Login extends Component {
                             <MenuItem value='sarahedo'>Sarah Edo</MenuItem>
                             <MenuItem value='tylermcginnis'>Tyler McGinnis</MenuItem>
                             <MenuItem value='johndoe'>John Doe</MenuItem>
-                            {/* <MenuItem value='logout'>No user</MenuItem> */}
                         </Select>
                         <div className='login-btn'>
                             <div>
@@ -83,16 +80,6 @@ class Login extends Component {
                                             Log in
                                         </Button>
                                 }
-                                {/* {user === '' && (
-                                    <Button disabled fullWidth className='MuiButton-containedPrimary'>
-                                        Log in
-                                    </Button>
-                                )}
-                                {user !== '' && (
-                                    <Button fullWidth onClick={(e) => this.logIn(e)} className='MuiButton-containedPrimary'>
-                                        Log in
-                                    </Button>
-                                )} */}
                             </div>
                             <div>
                                 {
