@@ -60,9 +60,9 @@ class Poll extends Component {
                                         <div>
                                             <Button onClick={ () => this.toHome()} className='MuiButton-contained'>Back to Polls</Button>
                                         </div>
-                                        <div>
+                                        {/* <div>
                                             <Button className='MuiButton-containedPrimary'>Next Poll</Button>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                                 )}
