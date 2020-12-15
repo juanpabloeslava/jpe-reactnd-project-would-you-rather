@@ -31,10 +31,7 @@ class App extends Component {
           <LoadingBar />
           <div className="App">
             <NavBar/>
-            {
-              authedUser === null 
-              ? <Redirect to='/login' />
-              : <Fragment>
+              <Fragment>
                 <Route exact path='/' render={ () => (
                   <Home />
                 )} />
@@ -52,7 +49,6 @@ class App extends Component {
                   <Login />
                 )} />
               </Fragment>
-            }       
           </div>
         </Fragment>
       </BrowserRouter>
