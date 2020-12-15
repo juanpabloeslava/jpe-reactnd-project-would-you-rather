@@ -36,12 +36,10 @@ class AddPollForm extends Component {
     }
 }
 
-// const mapStateToProps = ({ authedUser, polls, users }) => {
 const mapStateToProps = ( { authedUser, users } ) => {
     return {
         authedUser,
         users
-        // polls,
     }
 }
 
