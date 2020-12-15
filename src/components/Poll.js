@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import { formatDate } from '../utils/helpers'
 import PollOptions from './PollOptions'
-import { Redirect, withRouter } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'     // withRouter() passes 'history' to the comp as a prop, even if React Router is not rendering the comp
 // reducers
-import { connect } from 'react-redux'
+import { connect } from 'react-redux'       
 // material imports
 import { Button } from '@material-ui/core';
 
 class Poll extends Component {
 
     state = {
-        alreadyAnswered: false,
+        // alreadyAnswered: false,
         answer: ''
     }
 
@@ -23,10 +23,7 @@ class Poll extends Component {
         });
     }
 
-    toHome = () => {
-        // By using withRouter() down by connect(), it passes history to the comp as props even though React Router is not rendering the comp. 
-        this.props.history.push(`/`)
-    }
+    toHome = e => this.props.history.push(`/`)
 
     render() {
 
@@ -35,13 +32,27 @@ class Poll extends Component {
         const id = this.props.match.params.id
         const poll = polls[id]
         
-        // if there isn't a poll 
+        // if there isn't a poll, go to login
         if (poll === undefined) {
             return <Redirect to='/login' />
         }
 
+        // selected answer
+        // const activeUser = users[authedUser]
+        // console.log(poll)
+        // console.log('activeUser: ', activeUser)
+        // const pollAnswer = activeUser.answers[id]   // outputs optionOne / optionTwo
+        // const pollAnswerText = poll.{pollAnswer}.text
+        // // const pollAnswer = activeUser.answers
+        // console.log('pollAnswer: ', pollAnswer)
+        // console.log('pollAnswerText: ', pollAnswerText)
+        
         const author = users[poll.author]
         const displayName = author.id === authedUser ? 'You' : author.name
+        
+        // check if this poll has been answered by the active user
+        const totalVotes = poll.optionOne.votes.concat(poll.optionTwo.votes)
+        const answered = totalVotes.includes(authedUser) ? true : false
 
         return (
             <div className='list-container'>
@@ -62,10 +73,10 @@ class Poll extends Component {
                                         optionOne={poll.optionOne.text}
                                         optionTwo={poll.optionTwo.text}/>
                                 </div>
-                                { alreadyAnswered && (
+                                { answered && (
                                 <div>
                                     {/* <p> You chose: </p> */}
-                                    <span className='submission-summary'>You would rather {answer}</span>
+                                    <span className='submission-summary'>You would rather { answer === 'optionOne' ? poll.optionOne.text : poll.optionTwo.text }</span>
                                     <div className='poll-btns'>
                                         <div>
                                             <Button onClick={ () => this.toHome()} className='MuiButton-contained'>Back to Polls</Button>

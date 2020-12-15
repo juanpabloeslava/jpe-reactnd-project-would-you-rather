@@ -13,7 +13,7 @@ class PollOptions extends Component {
 
     state = {
         value: '',
-        submited: false
+        // submited: false
     }
 
     handleChange = (event) => {
@@ -26,11 +26,6 @@ class PollOptions extends Component {
         event.preventDefault();
         const { value } = this.state
         const { dispatch, authedUser, id } = this.props
-        console.log('authedUser: ', authedUser)
-        // deactivate options and submit button
-        this.setState(prevState => {
-            return { submited: !prevState.submited };
-        });
         // dispatch answer action
         dispatch(answerPollAsync({
             authedUser: authedUser,
@@ -47,16 +42,22 @@ class PollOptions extends Component {
     }
 
     render() {
-        console.log('state at beginning of Poll options: ', this.props.state)
-        const { optionOne,optionTwo } = this.props
-        const { submited } = this.state
+
+        const { optionOne, optionTwo, polls, authedUser, id } = this.props
+
+        const poll = polls[id]
+        
+        // check if this poll has been answered by the active user
+        const totalVotes = poll.optionOne.votes.concat(poll.optionTwo.votes)
+        const answered = totalVotes.includes(authedUser) ? true : false
+        
 
         return (
             <form onSubmit={this.handleSubmit}>
                 {/* modify FormControl width to 100% otherwise all goes to shit */}
                 <FormControl component="fieldset" className='MuiFormControl-fullWidth'>
                     {
-                        submited === true && (
+                        answered && (
                             <Fragment>
                                 <RadioGroup name="option" value={this.state.value} onChange={this.handleChange}>
                                     <FormControlLabel disabled value='optionOne' control={<Radio />} label={optionOne} />
@@ -70,16 +71,11 @@ class PollOptions extends Component {
                                         people={1}
                                         percentage={this.findPercentage(1)}/>
                                 </RadioGroup>
-                                <div>
-                                    <div className='poll-submit-btn'>
-                                        <Button disabled type="submit" className='MuiButton-contained'> Poll Submited!  </Button>
-                                    </div>
-                                </div>
                             </Fragment>
                         )
                     }
                     {
-                        submited === false && (
+                        !answered && (
                             <Fragment>
                                 <RadioGroup name="option" value={this.state.value} onChange={this.handleChange}>
                                     <FormControlLabel value='optionOne' control={<Radio />} label={optionOne} />
@@ -100,12 +96,12 @@ class PollOptions extends Component {
 
 }
 
-// const mapStateToProps = ({ authedUser }, ownProps) => {
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = ({ polls, authedUser }, ownProps) => {
+// const mapStateToProps = (state, ownProps) => {
     const id = ownProps.match.params.id
     return {
-        state,
-        authedUser: state.authedUser,
+        polls,
+        authedUser,
         id
     }
 }
