@@ -53,7 +53,8 @@ class PollOptions extends Component {
         const activeUser = users[authedUser]
         const thisPollAnswer = activeUser.answers[poll.id]
         
-        // const checkOption = answered ? value === '' 
+        const checkOptionOne = thisPollAnswer === 'optionOne' ? true : false
+        const checkOptionTwo = !checkOptionOne
 
         return (
             <form onSubmit={this.handleSubmit}>
@@ -81,12 +82,17 @@ class PollOptions extends Component {
                                     <FormControlLabel 
                                         disabled value='optionOne' label={optionOne} 
                                         control={
-                                            <Radio />}/>
+                                            <Radio checked={checkOptionOne}/>}
+                                    />
                                     <PollPercentage 
                                         selected={true}
                                         people={2}
                                         percentage={this.findPercentage(2)}/>
-                                    <FormControlLabel disabled value='optionTwo' control={<Radio />} label={optionTwo} />
+                                    <FormControlLabel 
+                                        disabled value='optionTwo'  label={optionTwo}  
+                                        control={
+                                            <Radio checked={checkOptionTwo}/>}
+                                    />
                                     <PollPercentage 
                                         selected={false}
                                         people={1}

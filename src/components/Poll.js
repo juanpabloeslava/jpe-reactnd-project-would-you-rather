@@ -32,8 +32,6 @@ class Poll extends Component {
         // which was the answer?
         const activeUser = users[authedUser]
         const thisPollAnswer = activeUser.answers[poll.id]          //outputs either 'optionOne' or 'optionTwo'
-        console.log('active user: ', activeUser)
-        console.log('thisPollAnswer: ', thisPollAnswer)
 
         return (
             <div className='list-container'>
