@@ -33,11 +33,6 @@ class PollOptions extends Component {
         }))
     };
 
-    findPercentage = (val)  => {
-        const per =  val / 3 * 100 
-        return parseFloat(per).toFixed(0)
-    }
-
     render() {
 
         const { users, optionOne, optionTwo, polls, authedUser, id } = this.props
@@ -55,6 +50,11 @@ class PollOptions extends Component {
         
         const checkOptionOne = thisPollAnswer === 'optionOne' ? true : false
         const checkOptionTwo = !checkOptionOne
+
+        // Poll Percentages
+        const totalVotesNum = totalVotes.length
+        const votesOptionOne = poll.optionOne.votes.length
+        const votesOptionTwo = poll.optionTwo.votes.length
 
         return (
             <form onSubmit={this.handleSubmit}>
@@ -85,18 +85,18 @@ class PollOptions extends Component {
                                             <Radio checked={checkOptionOne}/>}
                                     />
                                     <PollPercentage 
-                                        selected={true}
-                                        people={2}
-                                        percentage={this.findPercentage(2)}/>
+                                        selected={checkOptionOne}
+                                        totalVotes={totalVotesNum}
+                                        optionVotes={votesOptionOne}/>
                                     <FormControlLabel 
                                         disabled value='optionTwo'  label={optionTwo}  
                                         control={
                                             <Radio checked={checkOptionTwo}/>}
                                     />
-                                    <PollPercentage 
-                                        selected={false}
-                                        people={1}
-                                        percentage={this.findPercentage(1)}/>
+                                    <PollPercentage
+                                        selected={checkOptionTwo}
+                                        totalVotes={totalVotesNum}
+                                        optionVotes={votesOptionTwo}/>
                                 </RadioGroup>
                             </Fragment>
                         )

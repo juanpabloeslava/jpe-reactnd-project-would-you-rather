@@ -1,6 +1,14 @@
-import { Fragment } from 'react'
+import React, { Fragment } from 'react'
 
-const PollPercentage = ({selected, people, percentage}) => {
+const findPercentage = (votes, totalVotes)  => {
+    const per =  votes / totalVotes * 100 
+    return parseFloat(per).toFixed(0)
+}
+
+const PollPercentage = ({selected, totalVotes, optionVotes}) => {
+
+    const percentage = findPercentage(optionVotes, totalVotes)
+
     return ( 
         <Fragment>
             <div className={ selected ? `percentage-bar sel` : 'percentage-bar'}>
@@ -13,7 +21,12 @@ const PollPercentage = ({selected, people, percentage}) => {
                 </div>            
             </div>
             <p>
-                {people} / 3 people ({percentage}%) selected this option
+                {
+                    selected 
+                        ? `${optionVotes} / ${totalVotes} people (${percentage}%) selected this option, and you are one of those!`
+                        : `${optionVotes} / ${totalVotes} people (${percentage}%) selected this option`
+                }
+                
             </p>
         </Fragment>
     )
