@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
 import { formatDate } from '../utils/helpers'
 import PollOptions from './PollOptions'
-import { Redirect, withRouter } from 'react-router-dom'     // withRouter() passes 'history' to the comp as a prop, even if React Router is not rendering the comp
+import { Redirect, withRouter, Link } from 'react-router-dom'     // withRouter() passes 'history' to the comp as a prop, even if React Router is not rendering the comp
 // reducers
 import { connect } from 'react-redux'       
 // material imports
 import { Button } from '@material-ui/core';
 
 class Poll extends Component {
-
-    toHome = e => this.props.history.push(`/`)
 
     render() {
 
@@ -58,11 +56,8 @@ class Poll extends Component {
                                     <span className='submission-summary'>You would rather { thisPollAnswer === 'optionOne' ? poll.optionOne.text : 'optionTwo' ? poll.optionTwo.text : 'not say' }</span>
                                     <div className='poll-btns'>
                                         <div>
-                                            <Button onClick={ () => this.toHome()} className='MuiButton-contained'>Back to Polls</Button>
+                                            <Button component={Link} to='/' underline='none' className='MuiButton-contained'>Back to Polls</Button>
                                         </div>
-                                        {/* <div>
-                                            <Button className='MuiButton-containedPrimary'>Next Poll</Button>
-                                        </div> */}
                                     </div>
                                 </div>
                                 )}
