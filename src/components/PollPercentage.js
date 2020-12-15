@@ -3,7 +3,7 @@ import { Fragment } from 'react'
 const PollPercentage = ({selected, people, percentage}) => {
     return ( 
         <Fragment>
-            <div className='percentage-bar'>
+            <div className={ selected ? `percentage-bar sel` : 'percentage-bar'}>
                 <div 
                     className={ selected ? `percentage-bar-done sel` : 'percentage-bar-done'}
                     style={{

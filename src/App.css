@@ -170,24 +170,29 @@ li.login {
 
 /* Poll Percentage */
 .percentage-bar {
-  /* margin: 1rem; */
   height: 30px;
-  background-color: #ddd;
+  background-color: rgba(0, 0, 0, 0.12);
   border-radius: 15px;
+}
+.percentage-bar.sel {
+  /* background-color: rgba(25, 118, 210, 0.3); */
+  background-color: rgba(63, 81, 181, 0.3);
 }
 
 .percentage-bar-done {
   height: 100%;
   width: 50%;
-  background: linear-gradient(to right,#e0240b, #80300b );
+  background: linear-gradient(to right,#bdbdbd,#A8A8A8 );
+  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
   border-radius: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #f1f1f1;
 }
-.sel {
-  background: linear-gradient(to right,#15ca1e, #058d7b );
+.percentage-bar-done.sel {
+  /* background: linear-gradient(to right,rgba(25, 118, 210, 1), rgba(25, 93, 210, 1) ); */
+  background: linear-gradient(to right, rgba(63, 81, 181, 1), rgba(48, 70, 196, 1) );
 }
 
 /* Add poll */

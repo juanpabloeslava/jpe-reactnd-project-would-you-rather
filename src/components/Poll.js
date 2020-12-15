@@ -10,7 +10,6 @@ import { Button } from '@material-ui/core';
 class Poll extends Component {
 
     state = {
-        // alreadyAnswered: false,
         answer: ''
     }
 
@@ -36,16 +35,6 @@ class Poll extends Component {
         if (poll === undefined) {
             return <Redirect to='/login' />
         }
-
-        // selected answer
-        // const activeUser = users[authedUser]
-        // console.log(poll)
-        // console.log('activeUser: ', activeUser)
-        // const pollAnswer = activeUser.answers[id]   // outputs optionOne / optionTwo
-        // const pollAnswerText = poll.{pollAnswer}.text
-        // // const pollAnswer = activeUser.answers
-        // console.log('pollAnswer: ', pollAnswer)
-        // console.log('pollAnswerText: ', pollAnswerText)
         
         const author = users[poll.author]
         const displayName = author.id === authedUser ? 'You' : author.name
