@@ -33,7 +33,7 @@ class AddPollOptions extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         const { optionOneText, optionTwoText } = this.state
-        const { authedUser, dispatch } = this.props
+        const { authedUser, addPollAsync } = this.props
         const author = authedUser
         const newPoll = {
             optionOneText,
@@ -41,7 +41,7 @@ class AddPollOptions extends Component {
             author
         }
         // dispatch addPoll action
-        dispatch(addPollAsync(newPoll))
+        addPollAsync(newPoll)
         console.log('new poll submited: ', newPoll)
         // go home
         this.toHome();
@@ -89,5 +89,5 @@ const mapStateToProps = ({ authedUser }) => {
     }
 
 export default withRouter(
-    connect(mapStateToProps)(AddPollOptions)
+    connect(mapStateToProps, {addPollAsync})(AddPollOptions)
 )

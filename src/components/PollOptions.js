@@ -3,7 +3,7 @@ import PollPercentage from './PollPercentage'
 // import { saveUserAnswer } from '../utils/_API'
 import { withRouter } from 'react-router-dom'
 // actions
-import { answerPollAsync } from '../actions'
+import { answerPollAsync } from '../actions'        // used down under by mapDispatchToProps
 // reducers
 import { connect } from 'react-redux'
 // material UI imports
@@ -23,26 +23,29 @@ class PollOptions extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
+
         const { value } = this.state
-        const { dispatch, authedUser, id } = this.props
-        // dispatch answer action
-        dispatch(answerPollAsync({
+        const { authedUser, id, answerPollAsync } = this.props
+
+        // dispatch is already included, comes via mapDispatchToProps. Batteries sold separately
+        answerPollAsync({
             authedUser: authedUser,
             qid: id,
             answer: value
-        }))
+        })
+        // }))
     };
 
     render() {
 
         const { users, optionOne, optionTwo, polls, authedUser, id } = this.props
-
         const poll = polls[id]
         
         // check if this poll has been answered by the authenticated user
         const totalVotes = poll.optionOne.votes.concat(poll.optionTwo.votes)
         console.log('poll: ', poll)
-        const answered = totalVotes.includes(authedUser) ? true : false
+        // .includes() returns a boolean
+        const answered = totalVotes.includes(authedUser)
         
         // display option as checked
         const activeUser = users[authedUser]
@@ -109,7 +112,6 @@ class PollOptions extends Component {
 }
 
 const mapStateToProps = ({ polls, authedUser, users }, ownProps) => {
-// const mapStateToProps = (state, ownProps) => {
     const id = ownProps.match.params.id
     return {
         polls,
@@ -120,5 +122,8 @@ const mapStateToProps = ({ polls, authedUser, users }, ownProps) => {
 }
 
 export default withRouter(
-    connect(mapStateToProps)(PollOptions)
+    // on the second connect() argument, we're defining mapDispatchToProps As An Object
+    // connect() assumes that whatever gets passed in the object is an action creator
+    // https://react-redux.js.org/using-react-redux/connect-mapdispatch#defining-mapdispatchtoprops-as-an-object
+    connect(mapStateToProps, { answerPollAsync })(PollOptions)
 )
