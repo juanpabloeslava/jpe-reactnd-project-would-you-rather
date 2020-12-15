@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 // actions
 import { addPollAsync } from '../actions'
 // reducers
@@ -71,7 +71,7 @@ class AddPollOptions extends Component {
                                 <Button type="submit" className='MuiButton-outlined'>Submit Poll</Button>
                             </div>
                             <div>
-                                <Button onClick={this.toHome} className='MuiButton-contained'>Cancel</Button>
+                                <Button component={Link} to='/' underline='none' className='MuiButton-contained'>Cancel</Button>
                             </div>
                         </div>
                     </Fragment>
