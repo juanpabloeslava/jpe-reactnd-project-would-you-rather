@@ -3,17 +3,12 @@ import React, { Component } from 'react'
 import Poll from '../components/Poll';
 
 
-class PollView extends Component {
-
-    render() {
-        return (
-            <div className='view-container'>
-                <Poll />
-            </div>     
-        )
-    }
+const PollView = () => {
+    return (
+        <div className='view-container'>
+            <Poll />
+        </div>     
+    )
 }
-
-
 
 export default PollView
