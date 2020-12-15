@@ -9,14 +9,13 @@ class PollListItem extends Component {
     render() {
 
         const { authedUser, polls, users, id} = this.props
-
         const poll = polls[id]
         const author = users[poll.author]
         const displayName = author.id === authedUser ? 'You' : author.name
 
         return (
             <div>
-                <Link className='poll-list-item' to={`/polls/${id}`}>
+                <Link className='poll-list-item' to={`/questions/${id}`}>
                     <div className='avatar-container'>
                         <img alt={`avatar of ${author.name}`} className='avatar' src={author.avatarURL} />
                     </div>

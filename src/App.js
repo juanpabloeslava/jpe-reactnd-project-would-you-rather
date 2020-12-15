@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Redirect, Route } from 'react-router-dom'
 import './App.css';
 import LoadingBar from 'react-redux-loading-bar'
 // actions
@@ -23,28 +23,36 @@ class App extends Component {
   
   render() {
 
+    const { authedUser } = this.props
+    
     return (
       <BrowserRouter>
         <Fragment>
           <LoadingBar />
           <div className="App">
             <NavBar/>
-            <Route exact path='/' render={ () => (
-              <Home />
-            )} />
-            {/* ':id' referes to the poll's id */}
-            <Route exact path='/polls/:id' render={ () => (
-                <PollView />
-            )} />
-            <Route exact path='/add' render={ () => (
-              <AddPoll />
-            )} />
-            <Route exact path='/leaderboard' render={ () => (
-              <Leaderboard />
-            )} />
-            <Route exact path='/login' render={ () => (
-              <Login />
-            )} />
+            {
+              authedUser === null 
+              ? <Redirect to='/login' />
+              : <Fragment>
+                <Route exact path='/' render={ () => (
+                  <Home />
+                )} />
+                {/* ':id' referes to the poll's id */}
+                <Route exact path='/questions/:id' render={ () => (
+                    <PollView />
+                )} />
+                <Route exact path='/add' render={ () => (
+                  <AddPoll />
+                )} />
+                <Route exact path='/leaderboard' render={ () => (
+                  <Leaderboard />
+                )} />
+                <Route exact path='/login' render={ () => (
+                  <Login />
+                )} />
+              </Fragment>
+            }       
           </div>
         </Fragment>
       </BrowserRouter>
