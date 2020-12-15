@@ -1,10 +1,16 @@
 import React, { Component, Fragment } from 'react'
 import AddPollOptions from '../components/AddPollOptions'
 import { withRouter } from 'react-router-dom'
+// reducers
+import { connect } from 'react-redux'   
 
 class AddPollForm extends Component {
 
     render() {
+
+        const { authedUser, users } = this.props
+        
+        const activeUser = users[authedUser]
 
         return (
             <Fragment>
@@ -12,11 +18,11 @@ class AddPollForm extends Component {
                 <div>
                     <div className='poll'>
                         <div className='avatar-container'>
-                            <img alt='avatar of user' className='avatar' src={`https://gravatar.com/avatar/d7f22e9a1b376b88578391e75204a9b3?s=400&d=robohash&r=x`} />
+                            <img alt='avatar of user' className='avatar' src={activeUser.avatarURL} />
                         </div>
                         <div className='poll-info'>
                             <div>
-                                <span className='user-name'>Tyler is asking:</span>
+                                <span className='user-name'>You ask:</span>
                                 <p> Would you rather: </p>
                                 <div className='add-poll-options'>
                                     <AddPollOptions />
@@ -30,5 +36,16 @@ class AddPollForm extends Component {
     }
 }
 
+// const mapStateToProps = ({ authedUser, polls, users }) => {
+const mapStateToProps = ( { authedUser, users } ) => {
+    return {
+        authedUser,
+        users
+        // polls,
+    }
+}
 
-export default withRouter(AddPollForm)
+export default withRouter(
+    connect(mapStateToProps)(AddPollForm)
+)
+
