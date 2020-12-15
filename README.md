@@ -1,5 +1,5 @@
 # Would You Rather Project
-Juan Pablo Eslava
+Juan Pablo Eslava 
 ## About the project
 
 This is the 3rd project for Udacity's React Nanodegree Program.
