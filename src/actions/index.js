@@ -28,9 +28,11 @@ export const fetchInitialDataAsync = () => (dispatch) => {
 }
 
 export const answerPollAsync = (info) => (dispatch) => {
-    // return promise from API
+    dispatch(showLoading())
+    // return promise from API 
     return saveUserAnswer(info)
         .then( () => {
             dispatch(answerPoll(info))
+            dispatch(hideLoading())
         })
 }
