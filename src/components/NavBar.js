@@ -11,8 +11,6 @@ import compose from 'recompose/compose'
 
 class NavBar extends Component {
 
-    state = {}
-
     toHome = event => this.props.history.push(`/`)
     toAdd = event => this.props.history.push(`/add`)
     toLeaderboard = event => this.props.history.push(`/leaderboard`)
