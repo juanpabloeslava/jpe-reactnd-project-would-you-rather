@@ -26,14 +26,20 @@ class Login extends Component {
         event.preventDefault()
 
         const { user } = this.state
+        const { activeUser } = this.props
 
-        if (user === 'logout') {
+        if ( activeUser !== null ) {
             this.props.dispatch(userLogOut())
         } else {
             this.props.dispatch(setAuthedUser(user))
         }
 
         this.props.history.push(`/`)
+    }
+
+    logOut = (event) => {
+        event.preventDefault()
+        this.props.dispatch(userLogOut())
     }
 
     render() {
@@ -64,11 +70,20 @@ class Login extends Component {
                             <MenuItem value='sarahedo'>Sarah Edo</MenuItem>
                             <MenuItem value='tylermcginnis'>Tyler McGinnis</MenuItem>
                             <MenuItem value='johndoe'>John Doe</MenuItem>
-                            <MenuItem value='logout'>No user</MenuItem>
+                            {/* <MenuItem value='logout'>No user</MenuItem> */}
                         </Select>
                         <div className='login-btn'>
                             <div>
-                                {user === '' && (
+                                {
+                                    user === '' 
+                                        ? <Button disabled fullWidth className='MuiButton-contained'>
+                                            Log in
+                                        </Button>
+                                        : <Button fullWidth onClick={(e) => this.logIn(e)} className='MuiButton-containedPrimary'>
+                                            Log in
+                                        </Button>
+                                }
+                                {/* {user === '' && (
                                     <Button disabled fullWidth className='MuiButton-containedPrimary'>
                                         Log in
                                     </Button>
@@ -77,7 +92,16 @@ class Login extends Component {
                                     <Button fullWidth onClick={(e) => this.logIn(e)} className='MuiButton-containedPrimary'>
                                         Log in
                                     </Button>
-                                )}
+                                )} */}
+                            </div>
+                            <div>
+                                {
+                                    activeUser !== null
+                                    ? <Button fullWidth onClick={(e) => this.logOut(e)}  className='MuiButton-containedSecondary'>
+                                        Log out
+                                    </Button>
+                                    : <div></div>
+                                }
                             </div>
                         </div>
                     </FormControl>
