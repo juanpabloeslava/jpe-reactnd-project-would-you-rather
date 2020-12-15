@@ -87,7 +87,7 @@ class Login extends Component {
                                     ? <Button fullWidth onClick={(e) => this.logOut(e)}  className='MuiButton-containedSecondary'>
                                         Log out
                                     </Button>
-                                    : <div></div>
+                                    : null
                                 }
                             </div>
                         </div>
