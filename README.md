@@ -1,10 +1,19 @@
 # Would You Rather Project
+Juan Pablo Eslava
+## About the project
 
-This is the starter code for the final assessment project for Udacity's React & Redux course.
+This is the 3rd project for Udacity's React Nanodegree Program.
 
-The `_DATA.js` file represents a fake database and methods that let you access the data. The only thing you need to edit in the ` _DATA.js` file is the value of `avatarURL`. Each user should have an avatar, so you’ll need to add the path to each user’s avatar.
+The starter template was provided by Udacity, and can be found [here](https://github.com/udacity/reactnd-project-would-you-rather-starter)
 
-Using the provided starter code, you'll build a React/Redux front end for the application. We recommend using the [Create React App](https://github.com/facebook/create-react-app) to bootstrap the project.
+It consist on a `_DATA.js` file represents a fake database and methods that let you access the data. The only thing I edited in the ` _DATA.js` file was the value of `avatarURL`. Each user should have an avatar, so I used an AvatarURL generator. [this one, to be precise](https://vinicius73.github.io/gravatar-url-generator/#/).
+More info on the `_DATA.js` file down under. In this file, I mean, not Australia.
+
+The project was bootstrapped with the [Create React App](https://github.com/facebook/create-react-app).
+
+To run the Project, just run `npm install` and then `npm start`.
+
+If, how ever, you want to know more about that `_DATA.js`we were talking about earlier, or about the Create React App, just keep reading.
 
 ## Data
 
