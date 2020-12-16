@@ -26,15 +26,21 @@ class Login extends Component {
         event.preventDefault()
 
         const { user } = this.state
-        const { activeUser } = this.props
+        // location is passed when redirected from another comp as an object. Info on the link
+        // https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/Redirect.md#to-object
+        const { activeUser, location } = this.props
 
         if ( activeUser !== null ) {
             this.props.dispatch(userLogOut())
         } else {
             this.props.dispatch(setAuthedUser(user))
         }
-
-        this.props.history.push(`/`)
+        
+        // go back to where you came from after loggin in
+        if (location.state) {
+            console.log('login will now go to: ', location.state.referrer)
+            this.props.history.push(location.state.referrer)
+        }
     }
 
     logOut = (event) => {
@@ -45,6 +51,8 @@ class Login extends Component {
     render() {
 
         const { classes, activeUser } = this.props
+        const { location } = this.props
+        console.log('location from leaderboard (in login): ', location)
         const { user } = this.state
 
         return (

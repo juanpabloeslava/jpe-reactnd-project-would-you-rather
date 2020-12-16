@@ -16,7 +16,11 @@ class AddPoll extends Component {
                 {
                     authedUser !== null
                         ? <AddPollForm />
-                        : <Redirect to='/login' />
+                        : <Redirect    
+                        to={{
+                            pathname: '/login',
+                            state: { referrer: '/add' }
+                        }} />
                 }
             </div>
         )

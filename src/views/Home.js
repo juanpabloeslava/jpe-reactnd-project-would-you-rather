@@ -17,7 +17,11 @@ class Home extends Component {
                 {
                     authedUser !== null
                         ? <PollList />
-                        : <Redirect to='/login' />
+                        : <Redirect    
+                            to={{
+                                pathname: '/login',
+                                state: { referrer: '/' }
+                            }} />
                 }
             </div>
         )

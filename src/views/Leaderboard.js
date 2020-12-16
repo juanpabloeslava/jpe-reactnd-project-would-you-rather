@@ -15,7 +15,11 @@ class Leaderboard extends Component {
                 {
                     authedUser !== null
                     ? <LeaderboardList />
-                    : <Redirect to='/login' />
+                    : <Redirect    
+                        to={{
+                            pathname: '/login',
+                            state: { referrer: '/leaderboard' }
+                        }} />
                 }
                 
             </div>
