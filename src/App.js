@@ -49,6 +49,9 @@ class App extends Component {
                 <Route exact path='/login' render={ () => (
                   <Login />
                 )} />
+                <Route exact path='/404' render={ () => (
+                  <Error404 />
+                )} />
                 <Route component={Error404}/>
               </Switch>
           </div>

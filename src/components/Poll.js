@@ -15,12 +15,20 @@ class Poll extends Component {
         const id = this.props.match.params.id
         const poll = polls[id]
 
-        // if there isn't a poll or there isn't an authedUser, go to login
-        if (poll === undefined || authedUser === undefined) {
+        // if there an authedUser, go to login
+        if (authedUser === undefined) {
             return <Redirect    
                         to={{
                             pathname: '/login',
                             state: { referrer: `/questions/${id}` }
+                        }} />
+        }
+        // if there isn't a poll go to error page
+        if (poll === undefined) {
+            return <Redirect    
+                        to={{
+                            pathname: '/login',
+                            state: { referrer: `/404` }
                         }} />
         }
 
