@@ -11,7 +11,7 @@ import { InputLabel, MenuItem, FormControl, Select, Button } from '@material-ui/
 import compose from 'recompose/compose'
 
 class Login extends Component {
-
+    
     state = {
         user: ''
     }
@@ -35,7 +35,7 @@ class Login extends Component {
         } else {
             this.props.dispatch(setAuthedUser(user))
         }
-        
+
         // go back to where you came from after loggin in
         if (location.state) {
             console.log('login will now go to: ', location.state.referrer)
