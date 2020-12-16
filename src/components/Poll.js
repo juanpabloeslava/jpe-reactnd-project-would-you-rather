@@ -17,7 +17,6 @@ class Poll extends Component {
 
         // if there isn't a poll or there isn't an authedUser, go to login
         if (poll === undefined || authedUser === undefined) {
-            // return <Redirect to='/login' />
             return <Redirect    
                         to={{
                             pathname: '/login',
