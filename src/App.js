@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter, Redirect, Route } from 'react-router-dom'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import './App.css';
 import LoadingBar from 'react-redux-loading-bar'
 // actions
@@ -13,6 +13,7 @@ import Leaderboard from './views/Leaderboard'
 import Login from './views/Login'
 import PollView from './views/PollView';
 import NavBar from './components/NavBar';
+import Error404 from './views/Error404';
 
 
 class App extends Component {
@@ -31,7 +32,7 @@ class App extends Component {
           <LoadingBar />
           <div className="App">
             <NavBar/>
-              <Fragment>
+              <Switch>
                 <Route exact path='/' render={ () => (
                   <Home />
                 )} />
@@ -48,7 +49,8 @@ class App extends Component {
                 <Route exact path='/login' render={ () => (
                   <Login />
                 )} />
-              </Fragment>
+                <Route component={Error404}/>
+              </Switch>
           </div>
         </Fragment>
       </BrowserRouter>
