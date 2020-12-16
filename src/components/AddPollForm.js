@@ -14,7 +14,7 @@ class AddPollForm extends Component {
 
         return (
             <Fragment>
-                <h3 className='center'>Create Poll</h3>
+                <h3 className='center'>Add a new Poll</h3>
                 <div>
                     <div className='poll'>
                         <div className='avatar-container'>
