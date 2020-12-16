@@ -1,11 +1,11 @@
-import actionTypes from '../actions/actionTypes'
+import { GET_POLLS, ANSWER_POLL, ADD_POLL } from '../actions/actionTypes'
 
 // initialize polls in the state as an empty object
 export default function pollsRed(state = {}, action) {
     switch (action.type) {
-        case actionTypes.GET_POLLS:
+        case GET_POLLS:
             return action.polls
-        case actionTypes.ANSWER_POLL:
+        case ANSWER_POLL:
             const { authedUser, qid, answer } = action
             // state refers to just the polls/questions portion of the state. The destructuring is the same is in the _saveQuestionAnswer function in 'src/utils/_DATA'
             return {
@@ -18,7 +18,7 @@ export default function pollsRed(state = {}, action) {
                     }
                 }
             }
-        case actionTypes.ADD_POLL :
+        case ADD_POLL :
             const { question } = action
             return {
                 ...state,

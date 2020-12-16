@@ -1,17 +1,17 @@
-import actionTypes from './actionTypes'
+import { GET_POLLS, ANSWER_POLL, ADD_POLL, } from './actionTypes'
 
 // to dispatch once the getInitialData() Promise has resolved, to pass the retrieved polls
 
 export function getPolls (polls) {
     return {
-        type: actionTypes.GET_POLLS,
+        type: GET_POLLS,
         polls
     }
 }
 
 export function answerPoll ({ authedUser, qid, answer }) {
     return {
-        type: actionTypes.ANSWER_POLL,
+        type: ANSWER_POLL,
         authedUser,
         qid,
         answer
@@ -20,7 +20,7 @@ export function answerPoll ({ authedUser, qid, answer }) {
 
 export function addPoll ( question ) {
     return {
-        type: actionTypes.ADD_POLL,
+        type: ADD_POLL,
         question
     }
 }

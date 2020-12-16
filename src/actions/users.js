@@ -1,9 +1,9 @@
-import actionTypes from './actionTypes'
+import { GET_USERS } from '../actions/actionTypes'
 
 // to dispatch once the getInitialData() Promise has resolved, to pass the retrieved users
 export function getUsers (users) {
     return {
-        type: actionTypes.GET_USERS,
+        type: GET_USERS,
         users
     }
 }

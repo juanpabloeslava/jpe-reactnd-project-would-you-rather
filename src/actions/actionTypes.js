@@ -1,10 +1,7 @@
-const actionTypes = {
-    SET_AUTHED_USER: 'SET_AUTHED_USER',
-    LOG_OUT:'LOG_OUT',
-    GET_USERS: 'GET_USERS',
-    GET_POLLS: 'GET_POLLS',
-    ANSWER_POLL: 'ANSWER_POLL',
-    ADD_POLL: 'ADD_POLL'
-}
+export const SET_AUTHED_USER = 'SET_AUTHED_USER'
+export const LOG_OUT = 'LOG_OUT'
+export const GET_USERS = 'GET_USERS'
+export const GET_POLLS = 'GET_POLLS'
+export const ANSWER_POLL = 'ANSWER_POLL'
+export const ADD_POLL = 'ADD_POLL'
 
-export default actionTypes
